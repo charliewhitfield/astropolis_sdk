@@ -21,6 +21,10 @@ enum { # _dirty
 const PERSIST_PROPERTIES2: Array[StringName] = [
 	&"revenue",
 	&"accountings",
+	
+	&"delta_revenue",
+	&"delta_accountings",
+	
 	&"_dirty_accountings",
 ]
 
@@ -28,11 +32,16 @@ const PERSIST_PROPERTIES2: Array[StringName] = [
 var revenue := 0.0 # positive values of INC_STMT_GROSS
 var accountings: Array[float]
 
+# accumulators
+var delta_revenue := 0.0 # positive values of INC_STMT_GROSS
+var delta_accountings: Array[float]
+
+
 # TODO:
 # var items: Dictionary # facility only?
 
 
-var _dirty_accountings := 0
+var _dirty_accountings := 0 # max 64
 
 
 func _init(is_new := false) -> void:
@@ -45,14 +54,59 @@ func _init(is_new := false) -> void:
 	accountings = ivutils.init_array(n_accountings, 0.0, TYPE_FLOAT)
 
 
-func take_server_delta(data: Array) -> void:
-	# facility accumulator only; zero accumulators and dirty flags
+func take_delta(data: Array) -> void:
+	# save delta in data, apply & zero delta, reset dirty flags
 	
 	_int_data = data[0]
 	_float_data = data[1]
 	
 	_int_data[6] = _int_data.size()
 	_int_data[7] = _float_data.size()
+	
+	_int_data.append(_dirty)
+	if _dirty & DIRTY_REVENUE:
+		_float_data.append(delta_revenue)
+		revenue += delta_revenue
+		delta_revenue = 0.0
+	
+	_take_floats_delta(accountings, delta_accountings, _dirty_accountings)
+	
+	_dirty = 0
+	_dirty_accountings = 0
+
+
+func add_delta(data: Array) -> void:
+	# apply delta & dirty flags
+	
+	_int_data = data[0]
+	_float_data = data[1]
+	
+	_int_offset = _int_data[6]
+	_float_offset = _int_data[7]
+	
+	var svr_qtr := _int_data[0]
+	run_qtr = svr_qtr # TODO: histories
+	
+	var dirty := _int_data[_int_offset]
+	_int_offset += 1
+	_dirty |= dirty
+	if dirty & DIRTY_REVENUE:
+		delta_revenue += _float_data[_float_offset]
+		_float_offset += 1
+	
+	_dirty_accountings |= _add_floats_delta(accountings)
+
+
+# REMOVE BELOW!
+
+func take_server_delta(data: Array) -> void:
+	# facility accumulator only; zero accumulators and dirty flags
+	
+	_int_data = data[0]
+	_float_data = data[1]
+	
+	_int_data[6] = _int_data.size() # int_offset
+	_int_data[7] = _float_data.size() # float_offset
 	
 	_int_data.append(_dirty)
 	if _dirty & DIRTY_REVENUE:

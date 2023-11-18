@@ -19,7 +19,8 @@ const PERSIST_PROPERTIES2: Array[StringName] = [
 	&"immigration_attractions",
 	&"emigration_pressures",
 	&"history_numbers",
-	&"_is_facility",
+	&"is_facility",
+	&"delta_numbers",
 	&"_dirty_numbers",
 	&"_dirty_carrying_capacities",
 	&"_dirty_growth_rates",
@@ -27,15 +28,19 @@ const PERSIST_PROPERTIES2: Array[StringName] = [
 	&"_dirty_emigration_pressures",
 ]
 
-# Interface read-only! All data flows server -> interface.
+# All data flows server -> interface.
 var numbers: Array[float]
 var growth_rates: Array[float] # Facility only
 var carrying_capacities: Array[float] # Facility only; indexed by carrying_capacity_group
 var immigration_attractions: Array[float] # Facility only
 var emigration_pressures: Array[float] # Facility only
+
 var history_numbers: Array[Array] # Array for ea pop type; [..., qrt_before_last, last_qrt]
 
-var _is_facility := false
+var is_facility := false
+
+# accumulators
+var delta_numbers: Array[float]
 
 # server dirty data (dirty indexes as bit flags; max 64)
 var _dirty_numbers := 0
@@ -52,7 +57,7 @@ static var _is_class_instanced := false
 
 
 
-func _init(is_new := false, is_facility := false) -> void:
+func _init(is_new := false, is_facility_ := false) -> void:
 	if !_is_class_instanced:
 		_is_class_instanced = true
 		_n_populations = _table_n_rows[&"populations"]
@@ -63,9 +68,9 @@ func _init(is_new := false, is_facility := false) -> void:
 		return
 	numbers = ivutils.init_array(_n_populations, 0.0, TYPE_FLOAT)
 	history_numbers = ivutils.init_array(_n_populations, [] as Array[float], TYPE_ARRAY)
-	if !is_facility:
+	if !is_facility_:
 		return
-	_is_facility = true
+	is_facility = true
 	growth_rates = numbers.duplicate()
 	var n_carrying_capacity_groups: int = _table_n_rows.carrying_capacity_groups
 	carrying_capacities = ivutils.init_array(n_carrying_capacity_groups, 0.0, TYPE_FLOAT)
@@ -76,13 +81,13 @@ func _init(is_new := false, is_facility := false) -> void:
 # ********************************* READ **************************************
 
 
-func get_number(population_type := -1) -> float:
-	if population_type == -1:
-		return utils.get_float_array_sum(numbers)
-	return numbers[population_type]
+func get_number(type := -1) -> float:
+	if type == -1:
+		return utils.get_float_array_sum(numbers) + utils.get_float_array_sum(delta_numbers)
+	return numbers[type] + delta_numbers[type]
 
 
-func get_carrying_capacity_for_population(population_type: int) -> float:
+func get_carrying_capacity(population_type: int) -> float:
 	# sums the carrying_capacities that this population can occupy
 	var group: int = _carrying_capacity_groups[population_type]
 	var group2: int = _carrying_capacity_group2s[population_type]
@@ -112,7 +117,7 @@ func get_effective_pk_ratio(population_type: int) -> float:
 	# either may have alternative spaces to live in.
 	# Returns INF if carrying_capacity == 0.0.
 
-	var carrying_capacity := get_carrying_capacity_for_population(population_type)
+	var carrying_capacity := get_carrying_capacity(population_type)
 	if carrying_capacity == 0.0:
 		return INF
 	var init_ratio: float = numbers[population_type] / carrying_capacity
@@ -127,7 +132,7 @@ func get_effective_pk_ratio(population_type: int) -> float:
 		while i < _n_populations:
 			if i != population_type and numbers[i] > 0.0:
 				if _carrying_capacity_groups[i] == group or _carrying_capacity_group2s[i] == group:
-					pk_ratio += numbers[i] / get_carrying_capacity_for_population(i)
+					pk_ratio += numbers[i] / get_carrying_capacity(i)
 			i += 1
 	
 	var group2: int = _carrying_capacity_group2s[population_type]
@@ -143,7 +148,7 @@ func get_effective_pk_ratio(population_type: int) -> float:
 		while i < _n_populations:
 			if i != population_type and numbers[i] > 0.0:
 				if _carrying_capacity_groups[i] == group2 or _carrying_capacity_group2s[i] == group2:
-					pk_ratio2 += numbers[i] / get_carrying_capacity_for_population(i)
+					pk_ratio2 += numbers[i] / get_carrying_capacity(i)
 			i += 1
 	
 	if pk_ratio2 < pk_ratio:
@@ -211,7 +216,7 @@ func add_server_delta(data: Array) -> void:
 	
 	_add_dirty_floats(numbers)
 	
-	if !_is_facility:
+	if !is_facility:
 		return
 	
 	_add_dirty_floats(growth_rates)

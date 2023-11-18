@@ -113,7 +113,7 @@ func _take_floats_delta(base: Array[float], delta: Array[float], flags: int, bit
 		flags &= ~lsb
 
 
-func _set_floats_delta(array: Array[float], bits_offset := 0) -> int:
+func _set_floats_dirty(array: Array[float], bits_offset := 0) -> int:
 	var flags := _int_data[_int_offset]
 	var return_flags := flags
 	_int_offset += 1
@@ -126,7 +126,7 @@ func _set_floats_delta(array: Array[float], bits_offset := 0) -> int:
 	return return_flags
 
 
-func _set_ints_delta(array: Array[int], bits_offset := 0) -> int:
+func _set_ints_dirty(array: Array[int], bits_offset := 0) -> int:
 	var flags := _int_data[_int_offset]
 	var return_flags := flags
 	_int_offset += 1
