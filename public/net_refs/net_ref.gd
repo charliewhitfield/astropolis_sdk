@@ -16,6 +16,7 @@ extends RefCounted
 
 const ivutils := preload("res://addons/ivoyager_core/static/utils.gd")
 const utils := preload("res://public/static/utils.gd")
+const diversity := preload("res://public/static/diversity.gd")
 const LOG2_64 := Utils.LOG2_64
 
 const PERSIST_MODE := IVEnums.PERSIST_PROCEDURAL

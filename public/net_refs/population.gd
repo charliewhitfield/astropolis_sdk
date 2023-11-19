@@ -14,7 +14,7 @@ extends NetRef
 # save/load persistence for server only
 const PERSIST_PROPERTIES2: Array[StringName] = [
 	&"numbers",
-	&"growth_rates",
+	&"intrinsic_growths",
 	&"carrying_capacities",
 	&"immigration_attractions",
 	&"emigration_pressures",
@@ -22,15 +22,15 @@ const PERSIST_PROPERTIES2: Array[StringName] = [
 	&"is_facility",
 	&"delta_numbers",
 	&"_dirty_numbers",
+	&"_dirty_intrinsic_growths",
 	&"_dirty_carrying_capacities",
-	&"_dirty_growth_rates",
 	&"_dirty_immigration_attractions",
 	&"_dirty_emigration_pressures",
 ]
 
 # All data flows server -> interface.
 var numbers: Array[float]
-var growth_rates: Array[float] # Facility only
+var intrinsic_growths: Array[float] # Facility only
 var carrying_capacities: Array[float] # Facility only; indexed by carrying_capacity_group
 var immigration_attractions: Array[float] # Facility only
 var emigration_pressures: Array[float] # Facility only
@@ -44,7 +44,7 @@ var delta_numbers: Array[float]
 
 # server dirty data (dirty indexes as bit flags; max 64)
 var _dirty_numbers := 0
-var _dirty_growth_rates := 0
+var _dirty_intrinsic_growths := 0
 var _dirty_carrying_capacities := 0
 var _dirty_immigration_attractions := 0
 var _dirty_emigration_pressures := 0
@@ -71,7 +71,7 @@ func _init(is_new := false, is_facility_ := false) -> void:
 	if !is_facility_:
 		return
 	is_facility = true
-	growth_rates = numbers.duplicate()
+	intrinsic_growths = numbers.duplicate()
 	var n_carrying_capacity_groups: int = _table_n_rows.carrying_capacity_groups
 	carrying_capacities = ivutils.init_array(n_carrying_capacity_groups, 0.0, TYPE_FLOAT)
 	immigration_attractions = numbers.duplicate()
@@ -87,10 +87,21 @@ func get_number(type := -1) -> float:
 	return numbers[type] + delta_numbers[type]
 
 
-func get_carrying_capacity(population_type: int) -> float:
+func get_intrinsic_growth(type: int) -> float:
+	assert(is_facility)
+	return intrinsic_growths[type]
+
+
+func get_carrying_capacity(carrying_capacity_group: int) -> float:
+	assert(is_facility)
+	return carrying_capacities[carrying_capacity_group]
+
+
+func get_carrying_capacity_for_population(type: int) -> float:
 	# sums the carrying_capacities that this population can occupy
-	var group: int = _carrying_capacity_groups[population_type]
-	var group2: int = _carrying_capacity_group2s[population_type]
+	assert(is_facility)
+	var group: int = _carrying_capacity_groups[type]
+	var group2: int = _carrying_capacity_group2s[type]
 	var carrying_capacity: float = carrying_capacities[group]
 	if group2 != -1:
 		carrying_capacity += carrying_capacities[group2]
@@ -99,11 +110,12 @@ func get_carrying_capacity(population_type: int) -> float:
 
 func get_number_for_carrying_capacity_group(carrying_capacity_group: int) -> float:
 	# sums all populations that share this carrying_capacity_group
+	assert(is_facility)
 	var number := 0.0
 	var i := 0
 	while i < _n_populations:
-		if _carrying_capacity_groups[i] == carrying_capacity_group \
-				or _carrying_capacity_group2s[i] == carrying_capacity_group:
+		if (_carrying_capacity_groups[i] == carrying_capacity_group
+				or _carrying_capacity_group2s[i] == carrying_capacity_group):
 			number += numbers[i]
 		i += 1
 	return number
@@ -116,8 +128,9 @@ func get_effective_pk_ratio(population_type: int) -> float:
 	# carrying_capacity_group. I.e., they can occupy the same "space", while
 	# either may have alternative spaces to live in.
 	# Returns INF if carrying_capacity == 0.0.
+	assert(is_facility)
 
-	var carrying_capacity := get_carrying_capacity(population_type)
+	var carrying_capacity := get_carrying_capacity_for_population(population_type)
 	if carrying_capacity == 0.0:
 		return INF
 	var init_ratio: float = numbers[population_type] / carrying_capacity
@@ -132,7 +145,7 @@ func get_effective_pk_ratio(population_type: int) -> float:
 		while i < _n_populations:
 			if i != population_type and numbers[i] > 0.0:
 				if _carrying_capacity_groups[i] == group or _carrying_capacity_group2s[i] == group:
-					pk_ratio += numbers[i] / get_carrying_capacity(i)
+					pk_ratio += numbers[i] / get_carrying_capacity_for_population(i)
 			i += 1
 	
 	var group2: int = _carrying_capacity_group2s[population_type]
@@ -148,7 +161,7 @@ func get_effective_pk_ratio(population_type: int) -> float:
 		while i < _n_populations:
 			if i != population_type and numbers[i] > 0.0:
 				if _carrying_capacity_groups[i] == group2 or _carrying_capacity_group2s[i] == group2:
-					pk_ratio2 += numbers[i] / get_carrying_capacity(i)
+					pk_ratio2 += numbers[i] / get_carrying_capacity_for_population(i)
 			i += 1
 	
 	if pk_ratio2 < pk_ratio:
@@ -156,22 +169,23 @@ func get_effective_pk_ratio(population_type: int) -> float:
 	return pk_ratio
 
 
-# **************************** SERVER ONNLY !!!! ******************************
+# **************************** SERVER ONLY !!!! ******************************
 
 
-func change_number(population_type: int, change: float) -> void:
+func change_number(type: int, change: float) -> void:
 	assert(change == floor(change), "Expected integral value!")
-	numbers[population_type] += change
-	_dirty_numbers |= 1 << population_type
+	assert(change >= 0.0 or change >= -get_number(type))
+	delta_numbers[type] += change
+	_dirty_numbers |= 1 << type
 
 
-func change_growth_rate(population_type: int, change: float) -> void:
-	growth_rates[population_type] += change
-	_dirty_growth_rates |= 1 << population_type
+func set_intrinsic_growth(type: int, value: float) -> void:
+	intrinsic_growths[type] = value
+	_dirty_intrinsic_growths |= 1 << type
 
 
-func change_carrying_capacity(carrying_capacity_group: int, change: float) -> void:
-	carrying_capacities[carrying_capacity_group] += change
+func set_carrying_capacity(carrying_capacity_group: int, value: float) -> void:
+	carrying_capacities[carrying_capacity_group] = value
 	_dirty_carrying_capacities |= 1 << carrying_capacity_group
 
 
@@ -191,8 +205,8 @@ func take_server_delta(data: Array) -> void:
 	
 	_append_and_zero_dirty_floats(numbers, _dirty_numbers)
 	_dirty_numbers = 0
-	_append_and_zero_dirty_floats(growth_rates, _dirty_growth_rates)
-	_dirty_growth_rates = 0
+	_append_and_zero_dirty_floats(intrinsic_growths, _dirty_intrinsic_growths)
+	_dirty_intrinsic_growths = 0
 	_append_and_zero_dirty_floats(carrying_capacities, _dirty_carrying_capacities)
 	_dirty_carrying_capacities = 0
 	_append_and_zero_dirty_floats(immigration_attractions, _dirty_immigration_attractions)
@@ -219,7 +233,7 @@ func add_server_delta(data: Array) -> void:
 	if !is_facility:
 		return
 	
-	_add_dirty_floats(growth_rates)
+	_add_dirty_floats(intrinsic_growths)
 	_add_dirty_floats(carrying_capacities)
 	_add_dirty_floats(immigration_attractions)
 	_add_dirty_floats(emigration_pressures)

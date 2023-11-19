@@ -22,15 +22,22 @@ const PERSIST_PROPERTIES2: Array[StringName] = [
 	&"bioproductivity",
 	&"biomass",
 	&"diversity_model",
+	
+	&"delta_bioproductivity",
+	&"delta_biomass",
+	&"delta_diversity_model",
 ]
 
 var bioproductivity := 0.0
 var biomass := 0.0
-var diversity_model: Dictionary # see comments in static/utils.gd, get_diversity_index()
+var diversity_model: Dictionary # see static/diversity.gd
 
-# TODO: histories including biodiversity using get_development_biodiversity()
+# TODO: histories for all dev stats
 
-
+# accumulators
+var delta_bioproductivity := 0.0
+var delta_biomass := 0.0
+var delta_diversity_model: Dictionary
 
 
 
@@ -44,24 +51,21 @@ func _init(is_new := false) -> void:
 
 func get_development_biodiversity() -> float:
 	# NOT THREADSAFE !!!!
-	return utils.get_diversity_index(diversity_model)
+	var entropy := diversity.get_shannon_entropy_2(diversity_model, delta_diversity_model, false)
+	if entropy == 0.0:
+		return 0.0 # no species case; technically incorrect but intuitive
+	return exp(entropy)
 
 
 func get_species_richness() -> float:
 	# NOT THREADSAFE !!!!
 	# total number of species
-	return utils.get_species_richness(diversity_model)
+	return diversity.get_species_richness_2(diversity_model, delta_diversity_model)
  
 # ****************************** SERVER MODIFY ********************************
 
-func change_sp_group_abundance(key: int, change: float) -> void:
-	assert(change == floor(change), "Expected integral value!")
-	if diversity_model.has(key):
-		diversity_model[key] += change
-		if diversity_model[key] == 0.0:
-			diversity_model.erase(key)
-	elif change != 0.0:
-		diversity_model[key] = change
+func change_diversity_model(key: int, change: float) -> void:
+	diversity.change_model(diversity_model, key, change)
 
 
 # ********************************** SYNC *************************************

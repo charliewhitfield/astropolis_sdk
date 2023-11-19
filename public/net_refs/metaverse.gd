@@ -22,7 +22,7 @@ const PERSIST_PROPERTIES2: Array[StringName] = [
 ]
 
 var computations := 0.0
-var diversity_model: Dictionary # see comments in static/utils.gd, get_diversity_index()
+var diversity_model: Dictionary # see static/diversity.gd
 
 # TODO: histories including information using get_development_information()
 
@@ -39,13 +39,13 @@ func _init(is_new := false) -> void:
 
 func get_development_information() -> float:
 	# NOT THREADSAFE !!!!
-	return utils.get_shannon_entropy(diversity_model) # in 'bits'
+	return diversity.get_shannon_entropy(diversity_model) # in 'bits'
 
 
 
 # ****************************** SERVER MODIFY ********************************
 
-func change_sp_group_abundance(key: int, change: float) -> void:
+func change_diversity_model(key: int, change: float) -> void:
 	assert(change == floor(change), "Expected integral value!")
 	if diversity_model.has(key):
 		diversity_model[key] += change
