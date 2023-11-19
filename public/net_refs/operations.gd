@@ -509,15 +509,6 @@ func take_delta(data: Array) -> void:
 	_take_floats_delta(rates, delta_rates, _dirty_rates_2, 64)
 	_take_floats_delta(capacities, delta_capacities, _dirty_capacities_1)
 	_take_floats_delta(capacities, delta_capacities, _dirty_capacities_2, 64)
-	_take_floats_delta(est_revenues, delta_est_revenues, _dirty_est_revenues_1)
-	_take_floats_delta(est_revenues, delta_est_revenues, _dirty_est_revenues_2, 64)
-	_take_floats_delta(est_gross_incomes, delta_est_gross_incomes, _dirty_est_gross_incomes_1)
-	_take_floats_delta(est_gross_incomes, delta_est_gross_incomes, _dirty_est_gross_incomes_2, 64)
-	
-	_get_floats_dirty(est_gross_margins, _dirty_est_gross_margins_1) # not accumulator!
-	_get_floats_dirty(est_gross_margins, _dirty_est_gross_margins_2, 64) # not accumulator!
-	_get_ints_dirty(op_logics, _dirty_op_logics_1) # not accumulator!
-	_get_ints_dirty(op_logics, _dirty_op_logics_2, 64) # not accumulator!
 	
 	_dirty = 0
 	_dirty_crews = 0
@@ -525,10 +516,28 @@ func take_delta(data: Array) -> void:
 	_dirty_rates_2 = 0
 	_dirty_capacities_1 = 0
 	_dirty_capacities_2 = 0
+	
+	if !has_financials:
+		return
+	
+	_take_floats_delta(est_revenues, delta_est_revenues, _dirty_est_revenues_1)
+	_take_floats_delta(est_revenues, delta_est_revenues, _dirty_est_revenues_2, 64)
+	_take_floats_delta(est_gross_incomes, delta_est_gross_incomes, _dirty_est_gross_incomes_1)
+	_take_floats_delta(est_gross_incomes, delta_est_gross_incomes, _dirty_est_gross_incomes_2, 64)
+	
 	_dirty_est_revenues_1 = 0
 	_dirty_est_revenues_2 = 0
 	_dirty_est_gross_incomes_1 = 0
 	_dirty_est_gross_incomes_2 = 0
+	
+	if !is_facility:
+		return
+	
+	_get_floats_dirty(est_gross_margins, _dirty_est_gross_margins_1) # not accumulator!
+	_get_floats_dirty(est_gross_margins, _dirty_est_gross_margins_2, 64) # not accumulator!
+	_get_ints_dirty(op_logics, _dirty_op_logics_1) # not accumulator!
+	_get_ints_dirty(op_logics, _dirty_op_logics_2, 64) # not accumulator!
+	
 	_dirty_est_gross_margins_1 = 0
 	_dirty_est_gross_margins_2 = 0
 	_dirty_op_logics_1 = 0
@@ -570,6 +579,7 @@ func add_delta(data: Array) -> void:
 	
 	if !has_financials:
 		return
+	
 	_dirty_est_revenues_1 |= _add_floats_delta(delta_est_revenues)
 	_dirty_est_revenues_2 |= _add_floats_delta(delta_est_revenues, 64)
 	_dirty_est_gross_incomes_1 |= _add_floats_delta(delta_est_gross_incomes)
@@ -577,8 +587,9 @@ func add_delta(data: Array) -> void:
 
 	if !is_facility:
 		return
-	_dirty_est_gross_incomes_1 |= _set_floats_dirty(est_gross_margins) # not accumulator!
-	_dirty_est_gross_incomes_2 |= _set_floats_dirty(est_gross_margins, 64) # not accumulator!
+	
+	_dirty_est_gross_margins_1 |= _set_floats_dirty(est_gross_margins) # not accumulator!
+	_dirty_est_gross_margins_2 |= _set_floats_dirty(est_gross_margins, 64) # not accumulator!
 	_dirty_op_logics_1 |= _set_ints_dirty(op_logics) # not accumulator!
 	_dirty_op_logics_2 |= _set_ints_dirty(op_logics, 64) # not accumulator!
 

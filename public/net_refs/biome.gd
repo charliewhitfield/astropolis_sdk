@@ -53,7 +53,7 @@ func get_development_biodiversity() -> float:
 	# NOT THREADSAFE !!!!
 	var entropy := diversity.get_shannon_entropy_2(diversity_model, delta_diversity_model, false)
 	if entropy == 0.0:
-		return 0.0 # no species case; technically incorrect but intuitive
+		return 0.0 # no species; not technically correct but intuitive
 	return exp(entropy)
 
 
@@ -65,10 +65,64 @@ func get_species_richness() -> float:
 # ****************************** SERVER MODIFY ********************************
 
 func change_diversity_model(key: int, change: float) -> void:
-	diversity.change_model(diversity_model, key, change)
-
+	diversity.change_model(delta_diversity_model, key, change)
+	assert(_debug_assert_diversity_model_change(diversity_model, delta_diversity_model, key))
+	_dirty |= DIRTY_DIVERSITY_MODEL
 
 # ********************************** SYNC *************************************
+
+
+func take_delta(data: Array) -> void:
+	# save delta in data, apply & zero delta, reset dirty flags
+	
+	_int_data = data[0]
+	_float_data = data[1]
+	
+	_int_data[10] = _int_data.size()
+	_int_data[11] = _float_data.size()
+	
+	_int_data.append(_dirty)
+	if _dirty & DIRTY_BIOPRODUCTIVITY:
+		_float_data.append(delta_bioproductivity)
+		bioproductivity += delta_bioproductivity
+		delta_bioproductivity = 0.0
+	if _dirty & DIRTY_BIOMASS:
+		_float_data.append(delta_biomass)
+		biomass += delta_biomass
+		delta_biomass = 0.0
+	if _dirty & DIRTY_DIVERSITY_MODEL:
+		_take_diversity_model_delta(diversity_model, delta_diversity_model)
+	
+	_dirty = 0
+
+
+func add_delta(data: Array) -> void:
+	# apply delta & dirty flags
+	
+	_int_data = data[0]
+	_float_data = data[1]
+	
+	_int_offset = _int_data[10]
+	_float_offset = _int_data[11]
+	
+	var svr_qtr := _int_data[0]
+	run_qtr = svr_qtr # TODO: histories
+	
+	var dirty := _int_data[_int_offset]
+	_int_offset += 1
+	_dirty |= dirty
+	
+	if dirty & DIRTY_BIOPRODUCTIVITY:
+		delta_bioproductivity += _float_data[_float_offset]
+		_float_offset += 1
+	if dirty & DIRTY_BIOMASS:
+		delta_biomass += _float_data[_float_offset]
+		_float_offset += 1
+	if dirty & DIRTY_DIVERSITY_MODEL:
+		_add_diversity_model_delta(delta_diversity_model)
+
+
+# REMOVE BELOW!
 
 func take_server_delta(data: Array) -> void:
 	# facility accumulator only; zero accumulators and dirty flags

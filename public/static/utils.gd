@@ -45,9 +45,8 @@ static func get_n_bits(n: int) -> int:
 	return 0
 
 
-
-
 # array & dict utils
+
 
 static func invert_many_to_one_indexing(base: Array[int], size: int) -> Array[Array]:
 	# e.g., ([0, 1, 1, 1, 3, 3], 5)

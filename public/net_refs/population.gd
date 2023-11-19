@@ -10,6 +10,8 @@ extends NetRef
 # will be removed.
 #
 # Arrays indexed by population_type unless noted otherwise.
+#
+# TODO: Simplify to emigration/immigration force to 'pressure'.
 
 # save/load persistence for server only
 const PERSIST_PROPERTIES2: Array[StringName] = [
@@ -193,6 +195,62 @@ func set_carrying_capacity(carrying_capacity_group: int, value: float) -> void:
 
 
 # ********************************* SYNC **************************************
+
+
+func take_delta(data: Array) -> void:
+	# save delta in data, apply & zero delta, reset dirty flags
+	
+	_int_data = data[0]
+	_float_data = data[1]
+	
+	_int_data[8] = _int_data.size()
+	_int_data[9] = _float_data.size()
+	
+	_take_floats_delta(numbers, delta_numbers, _dirty_numbers)
+	
+	_dirty_numbers = 0
+	
+	if !is_facility:
+		return
+	
+	_get_floats_dirty(intrinsic_growths, _dirty_intrinsic_growths)
+	_get_floats_dirty(carrying_capacities, _dirty_carrying_capacities)
+	_get_floats_dirty(immigration_attractions, _dirty_immigration_attractions)
+	_get_floats_dirty(emigration_pressures, _dirty_emigration_pressures)
+	
+	_dirty_intrinsic_growths = 0
+	_dirty_carrying_capacities = 0
+	_dirty_immigration_attractions = 0
+	_dirty_emigration_pressures = 0
+
+
+func add_delta(data: Array) -> void:
+	# any target; reference safe
+	
+	_int_data = data[0]
+	_float_data = data[1]
+	
+	_int_offset = _int_data[8]
+	_float_offset = _int_data[9]
+	
+	var svr_qtr: int = _int_data[0]
+	if run_qtr < svr_qtr:
+		_update_history(svr_qtr) # before new quarter changes
+	
+	_dirty_numbers |= _add_floats_delta(delta_numbers)
+	
+	if !is_facility:
+		return
+	
+	_add_dirty_floats(intrinsic_growths)
+	_add_dirty_floats(carrying_capacities)
+	_add_dirty_floats(immigration_attractions)
+	_add_dirty_floats(emigration_pressures)
+
+
+
+
+# REMOVE BELOW!
 
 func take_server_delta(data: Array) -> void:
 	# facility accumulator only; zero values and dirty flags

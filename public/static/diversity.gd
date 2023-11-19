@@ -7,7 +7,8 @@ extends Object
 
 # Static class for methods related to diversity models.
 #
-# How 'diversity_model' works:
+# We use 'diversity_model' dictionaries to model species populations (or
+# unique information):
 #
 # In a perfect simulation, we would have a dictionary key for every species
 # with dict[key] equal to number of individuals in that species. But that's
@@ -17,9 +18,9 @@ extends Object
 #
 #   00, -> key represents 1 unique species (value is number of individuals)
 #   01, -> key represents 10 unique species (value is number of individuals in each)
-#   02, -> key represents 100 unique species (value is number of individuals in each)
+#   02, -> key represents 100 unique species
 #   ...
-#   99, -> key represents 1e99 unique species (value is number of individuals in each)
+#   99, -> key represents 1e99 unique species
 #   (Probably all keys will end 0x but just maybe we'll see 1x.)
 #
 # All diversity_model values are integral floats >= 1.0.
@@ -46,6 +47,8 @@ static func get_diversity_index(model: Dictionary, q := 1.0) -> float:
 		assert(model[key] > 0.0, "'model' has <= 0.0 value")
 		var mod100: int = key % 100 # 0, 1, ..., 99
 		n_individuals += model[key] * pow(10.0, mod100) # x 1, 10, ..., 1e99 sp
+	assert(n_individuals == floor(n_individuals))
+	assert(n_individuals > 0.0)
 	var summation := 0.0
 	for key: int in model:
 		var mod100: int = key % 100 # 0, 1, ..., 99
@@ -55,9 +58,8 @@ static func get_diversity_index(model: Dictionary, q := 1.0) -> float:
 
 
 static func get_shannon_entropy(model: Dictionary, in_bits := true) -> float:
-	# see comments above
-	# The unit of measure is 'bits' by default (base 2). If in_bits == false,
-	# then the unit of measure is 'natural units' (base e).
+	# The unit of measure is 'bits' (base 2) by default, or 'natural units'
+	# (base e) if in_bits == false.
 	if model.is_empty():
 		return 0.0 # not exactly correct but intuitive
 	var n_individuals := 0.0
@@ -146,12 +148,13 @@ static func get_species_richness_2(model: Dictionary, delta_model: Dictionary) -
 
 
 static func change_model(model: Dictionary, key: int, change: float) -> void:
+	assert(change != 0.0)
 	assert(change == floor(change), "Expected integral value!")
 	if model.has(key):
 		model[key] += change
 		if model[key] == 0.0:
 			model.erase(key)
-	elif change != 0.0:
+	else:
 		model[key] = change
 
 
