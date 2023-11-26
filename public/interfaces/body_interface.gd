@@ -29,11 +29,11 @@ var parent: BodyInterface # null for top body
 
 var satellites: Array[BodyInterface] = [] # resizable container - not threadsafe!
 var facilities: Array[Interface] = [] # resizable container - not threadsafe!
-var compositions: Array[Composition] = [] # resizable container - not threadsafe!
 var operations: Operations # when/if needed
 var population: Population # when/if needed
 var biome: Biome # when/if needed
 var metaverse: Metaverse # when/if needed
+var compositions: Array[Composition] = [] # resizable container - not threadsafe!
 
 
 
@@ -217,22 +217,12 @@ func set_server_init(data: Array) -> void:
 	if parent_name:
 		parent = interfaces_by_name[parent_name]
 		parent.add_satellite(self)
-	var compositions_data: Array = data[8]
-	var operations_data: Array = data[9]
-	var population_data: Array = data[10]
-	var biome_data: Array = data[11]
-	var metaverse_data: Array = data[12]
+	var operations_data: Array = data[8]
+	var population_data: Array = data[9]
+	var biome_data: Array = data[10]
+	var metaverse_data: Array = data[11]
+	var compositions_data: Array = data[12]
 	
-	if compositions_data:
-		var n_compositions := compositions_data.size()
-		compositions.resize(n_compositions)
-		var i := 0
-		while i < n_compositions:
-			var composition_data: Array = compositions_data[i]
-			var composition := Composition.new(true)
-			composition.set_server_init(composition_data)
-			compositions[i] = composition
-			i += 1
 	if operations_data:
 		operations = Operations.new(true)
 		operations.set_server_init(operations_data)
@@ -245,6 +235,17 @@ func set_server_init(data: Array) -> void:
 	if metaverse_data:
 		metaverse = Metaverse.new(true)
 		metaverse.set_server_init(metaverse_data)
+	
+	if compositions_data:
+		var n_compositions := compositions_data.size()
+		compositions.resize(n_compositions)
+		var i := 0
+		while i < n_compositions:
+			var composition_data: Array = compositions_data[i]
+			var composition := Composition.new(true)
+			composition.set_server_init(composition_data)
+			compositions[i] = composition
+			i += 1
 	
 
 func sync_server_dirty(data: Array) -> void:
