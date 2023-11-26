@@ -144,31 +144,35 @@ func set_server_init(data: Array) -> void:
 
 
 func sync_server_dirty(data: Array) -> void:
-	var dirty: int = data[0]
-	var k := 1
+	
+	var offsets: Array[int] = data[0]
+	var int_data: Array[int] = data[1]
+	var dirty: int = offsets[0]
+	var k := 1 # offsets offset
+	
 	if dirty & DIRTY_BASE:
-		gui_name = data[k]
-		player_class = data[k + 1]
-		var part_of_name: StringName = data[k + 2]
+		player_class = int_data[1]
+		var string_data: Array[String] = data[3]
+		gui_name = string_data[0]
+		var part_of_name := string_data[1]
 		part_of = interfaces_by_name[part_of_name] if part_of_name else null
-		polity_name = data[k + 3]
-		homeworld = data[k + 4]
-
-
-func propagate_server_delta(data: Array) -> void:
-	var int_data: Array[int] = data[0]
-	var dirty: int = int_data[1]
+		polity_name = string_data[2]
+		homeworld = string_data[3]
+	
 	if dirty & DIRTY_OPERATIONS:
-		operations.add_server_delta(data)
-	# skip inventory
+		operations.add_dirty(data, offsets[k], offsets[k + 1])
+		k += 2
 	if dirty & DIRTY_FINANCIALS:
-		financials.add_server_delta(data)
+		financials.add_dirty(data, offsets[k], offsets[k + 1])
+		k += 2
 	if dirty & DIRTY_POPULATION:
-		population.add_server_delta(data)
+		population.add_dirty(data, offsets[k], offsets[k + 1])
+		k += 2
 	if dirty & DIRTY_BIOME:
-		biome.add_server_delta(data)
+		biome.add_dirty(data, offsets[k], offsets[k + 1])
+		k += 2
 	if dirty & DIRTY_METAVERSE:
-		metaverse.add_server_delta(data)
+		metaverse.add_dirty(data, offsets[k], offsets[k + 1])
 	
 	assert(int_data[0] >= run_qtr)
 	if int_data[0] > run_qtr:
@@ -177,6 +181,7 @@ func propagate_server_delta(data: Array) -> void:
 		else:
 			run_qtr = int_data[0]
 			process_ai_new_quarter() # after component histories have updated
+
 
 
 func add_facility(facility: Interface) -> void:

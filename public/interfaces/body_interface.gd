@@ -249,45 +249,49 @@ func set_server_init(data: Array) -> void:
 	
 
 func sync_server_dirty(data: Array) -> void:
-	var dirty: int = data[0]
-	var k := 1
+	
+	var offsets: Array[int] = data[0]
+	var int_data: Array[int] = data[1]
+	var dirty: int = offsets[0]
+	var k := 1 # offsets offset
+	
 	if dirty & DIRTY_BASE:
-		gui_name = data[k]
-		solar_occlusion = data[k + 1]
-		k += 2
-	if dirty & DIRTY_COMPOSITIONS:
-		var n_compositions: int = data[k]
-		k += 1
-		while n_compositions > compositions.size(): # server added a Composition
-			var composition := Composition.new(true)
-			compositions.append(composition)
-		var i := 0
-		while i < n_compositions:
-			var composition: Composition = compositions[i]
-			k = composition.sync_server_dirty(data, k)
-			i += 1
-
-
-func propagate_server_delta(data: Array) -> void:
-	var int_data: Array[int] = data[0]
-	var dirty: int = int_data[1]
+		var float_data: Array[float] = data[2]
+		var string_data: Array[String] = data[3]
+		gui_name = string_data[0]
+		solar_occlusion = float_data[0]
+	
 	if dirty & DIRTY_OPERATIONS:
 		if !operations:
 			operations = Operations.new(true)
-		operations.add_server_delta(data)
-	# no inventory or financials
+		operations.add_dirty(data, offsets[k], offsets[k + 1])
+		k += 2
 	if dirty & DIRTY_POPULATION:
 		if !population:
-			population = Population.new(true)
-		population.add_server_delta(data)
+			population = Population.new(true, true)
+		population.add_dirty(data, offsets[k], offsets[k + 1])
+		k += 2
 	if dirty & DIRTY_BIOME:
 		if !biome:
 			biome = Biome.new(true)
-		biome.add_server_delta(data)
+		biome.add_dirty(data, offsets[k], offsets[k + 1])
+		k += 2
 	if dirty & DIRTY_METAVERSE:
 		if !metaverse:
 			metaverse = Metaverse.new(true)
-		metaverse.add_server_delta(data)
+		metaverse.add_dirty(data, offsets[k], offsets[k + 1])
+		k += 2
+	if dirty & DIRTY_COMPOSITIONS:
+		var dirty_compositions := offsets[k]
+		k += 1
+		while dirty_compositions:
+			var lsb := dirty_compositions & -dirty_compositions
+			var i: int = LOG2_64[lsb]
+			var composition: Composition = compositions[i]
+			composition.add_dirty(data, offsets[k], offsets[k + 1])
+			k += 2
+			dirty_compositions &= ~lsb
+	
 	
 	assert(int_data[0] >= run_qtr)
 	if int_data[0] > run_qtr:

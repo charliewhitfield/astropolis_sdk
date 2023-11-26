@@ -31,10 +31,10 @@ var run_qtr := -1 # last sync, = year * 4 + (quarter - 1)
 var _dirty := 0
 
 # processing
-var _float_data: Array[float]
 var _int_data: Array[int]
-var _float_offset: int
+var _float_data: Array[float]
 var _int_offset: int
+var _float_offset: int
 
 # indexing & localized
 static var tables_aux: Dictionary = ThreadsafeGlobal.tables_aux
@@ -54,22 +54,25 @@ func set_server_init(data: Array) -> void:
 	IVSaveUtils.set_persist_properties(self, data)
 
 
-func take_delta(_data: Array) -> void:
+func take_dirty(_data: Array) -> void:
+	# save delta in data, apply & zero delta, reset dirty flags
 	pass
 
 
-func add_delta(_data: Array) -> void:
-	pass
+func add_dirty(data: Array, int_offset: int, float_offset: int) -> void:
+	# apply delta & dirty flags
+	_int_data = data[1]
+	_float_data = data[2]
+	_int_offset = int_offset
+	_float_offset = float_offset
 
 
-func take_server_delta(_data: Array) -> void:
-	# DEPRECIATE
-	pass
-
-
-func add_server_delta(_data: Array) -> void:
-	# DEPRECIATE
-	pass
+func subtract_dirty(data: Array, int_offset: int, float_offset: int) -> void:
+	# apply delta & dirty flags
+	_int_data = data[1]
+	_float_data = data[2]
+	_int_offset = int_offset
+	_float_offset = float_offset
 
 
 func get_interface_dirty() -> Array:
@@ -116,8 +119,8 @@ func _take_floats_delta(base: Array[float], delta: Array[float], flags: int, bit
 
 func _set_floats_dirty(array: Array[float], bits_offset := 0) -> int:
 	var flags := _int_data[_int_offset]
-	var return_flags := flags
 	_int_offset += 1
+	var return_flags := flags
 	while flags:
 		var lsb := flags & -flags
 		var i: int = LOG2_64[lsb] + bits_offset
@@ -129,8 +132,8 @@ func _set_floats_dirty(array: Array[float], bits_offset := 0) -> int:
 
 func _set_ints_dirty(array: Array[int], bits_offset := 0) -> int:
 	var flags := _int_data[_int_offset]
-	var return_flags := flags
 	_int_offset += 1
+	var return_flags := flags
 	while flags:
 		var lsb := flags & -flags
 		var i: int = LOG2_64[lsb] + bits_offset
@@ -142,8 +145,8 @@ func _set_ints_dirty(array: Array[int], bits_offset := 0) -> int:
 
 func _add_floats_delta(delta_array: Array[float], bits_offset := 0) -> int:
 	var flags: int = _int_data[_int_offset]
-	var return_flags := flags
 	_int_offset += 1
+	var return_flags := flags
 	while flags:
 		var lsb := flags & -flags
 		var i: int = LOG2_64[lsb] + bits_offset
@@ -189,64 +192,64 @@ func _debug_assert_diversity_model_change(model: Dictionary, delta_model: Dictio
 
 # OLD!
 
-func _append_dirty_ints(array: Array[int], flags: int, bits_offset := 0) -> void:
-	_int_data.append(flags)
-	while flags:
-		var lsb := flags & -flags
-		var i: int = LOG2_64[lsb] + bits_offset
-		_int_data.append(array[i])
-		flags &= ~lsb
-
-
-func _append_dirty_floats(array: Array[float], flags: int, bits_offset := 0) -> void:
-	_int_data.append(flags)
-	while flags:
-		var lsb := flags & -flags
-		var i: int = LOG2_64[lsb] + bits_offset
-		_float_data.append(array[i])
-		flags &= ~lsb
-
-
-
-func _append_and_zero_dirty_floats(array: Array[float], flags: int, bits_offset := 0) -> void:
-	_int_data.append(flags)
-	while flags:
-		var lsb := flags & -flags
-		var i: int = LOG2_64[lsb] + bits_offset
-		_float_data.append(array[i])
-		array[i] = 0.0
-		flags &= ~lsb
-
-
-func _set_dirty_ints(array: Array[int], bits_offset := 0) -> void:
-	var flags := _int_data[_int_offset]
-	_int_offset += 1
-	while flags:
-		var lsb := flags & -flags
-		var i: int = LOG2_64[lsb] + bits_offset
-		array[i] = _int_data[_int_offset]
-		_int_offset += 1
-		flags &= ~lsb
-
-
-func _set_dirty_floats(array: Array[float], bits_offset := 0) -> void:
-	var flags := _int_data[_int_offset]
-	_int_offset += 1
-	while flags:
-		var lsb := flags & -flags
-		var i: int = LOG2_64[lsb] + bits_offset
-		array[i] = _float_data[_float_offset]
-		_float_offset += 1
-		flags &= ~lsb
-
-
-func _add_dirty_floats(array: Array[float], bits_offset := 0) -> void:
-	var flags: int = _int_data[_int_offset]
-	_int_offset += 1
-	while flags:
-		var lsb := flags & -flags
-		var i: int = LOG2_64[lsb] + bits_offset
-		array[i] += _float_data[_float_offset]
-		_float_offset += 1
-		flags &= ~lsb
+#func _append_dirty_ints(array: Array[int], flags: int, bits_offset := 0) -> void:
+	#_int_data.append(flags)
+	#while flags:
+		#var lsb := flags & -flags
+		#var i: int = LOG2_64[lsb] + bits_offset
+		#_int_data.append(array[i])
+		#flags &= ~lsb
+#
+#
+#func _append_dirty_floats(array: Array[float], flags: int, bits_offset := 0) -> void:
+	#_int_data.append(flags)
+	#while flags:
+		#var lsb := flags & -flags
+		#var i: int = LOG2_64[lsb] + bits_offset
+		#_float_data.append(array[i])
+		#flags &= ~lsb
+#
+#
+#
+#func _append_and_zero_dirty_floats(array: Array[float], flags: int, bits_offset := 0) -> void:
+	#_int_data.append(flags)
+	#while flags:
+		#var lsb := flags & -flags
+		#var i: int = LOG2_64[lsb] + bits_offset
+		#_float_data.append(array[i])
+		#array[i] = 0.0
+		#flags &= ~lsb
+#
+#
+#func _set_dirty_ints(array: Array[int], bits_offset := 0) -> void:
+	#var flags := _int_data[_int_offset]
+	#_int_offset += 1
+	#while flags:
+		#var lsb := flags & -flags
+		#var i: int = LOG2_64[lsb] + bits_offset
+		#array[i] = _int_data[_int_offset]
+		#_int_offset += 1
+		#flags &= ~lsb
+#
+#
+#func _set_dirty_floats(array: Array[float], bits_offset := 0) -> void:
+	#var flags := _int_data[_int_offset]
+	#_int_offset += 1
+	#while flags:
+		#var lsb := flags & -flags
+		#var i: int = LOG2_64[lsb] + bits_offset
+		#array[i] = _float_data[_float_offset]
+		#_float_offset += 1
+		#flags &= ~lsb
+#
+#
+#func _add_dirty_floats(array: Array[float], bits_offset := 0) -> void:
+	#var flags: int = _int_data[_int_offset]
+	#_int_offset += 1
+	#while flags:
+		#var lsb := flags & -flags
+		#var i: int = LOG2_64[lsb] + bits_offset
+		#array[i] += _float_data[_float_offset]
+		#_float_offset += 1
+		#flags &= ~lsb
 

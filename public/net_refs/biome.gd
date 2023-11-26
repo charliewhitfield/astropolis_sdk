@@ -72,14 +72,11 @@ func change_diversity_model(key: int, change: float) -> void:
 # ********************************** SYNC *************************************
 
 
-func take_delta(data: Array) -> void:
+func take_dirty(data: Array) -> void:
 	# save delta in data, apply & zero delta, reset dirty flags
 	
-	_int_data = data[0]
-	_float_data = data[1]
-	
-	_int_data[10] = _int_data.size()
-	_int_data[11] = _float_data.size()
+	_int_data = data[1]
+	_float_data = data[2]
 	
 	_int_data.append(_dirty)
 	if _dirty & DIRTY_BIOPRODUCTIVITY:
@@ -96,14 +93,12 @@ func take_delta(data: Array) -> void:
 	_dirty = 0
 
 
-func add_delta(data: Array) -> void:
+func add_dirty(data: Array, int_offset: int, float_offset: int) -> void:
 	# apply delta & dirty flags
-	
-	_int_data = data[0]
-	_float_data = data[1]
-	
-	_int_offset = _int_data[10]
-	_float_offset = _int_data[11]
+	_int_data = data[1]
+	_float_data = data[2]
+	_int_offset = int_offset
+	_float_offset = float_offset
 	
 	var svr_qtr := _int_data[0]
 	run_qtr = svr_qtr # TODO: histories
@@ -121,70 +116,4 @@ func add_delta(data: Array) -> void:
 	if dirty & DIRTY_DIVERSITY_MODEL:
 		_add_diversity_model_delta(delta_diversity_model)
 
-
-# REMOVE BELOW!
-
-func take_server_delta(data: Array) -> void:
-	# facility accumulator only; zero accumulators and dirty flags
-	
-	_int_data = data[0]
-	_float_data = data[1]
-	
-	_int_data[10] = _int_data.size()
-	_int_data[11] = _float_data.size()
-	
-	_int_data.append(_dirty)
-	if _dirty & DIRTY_BIOPRODUCTIVITY:
-		_float_data.append(bioproductivity)
-		bioproductivity = 0.0
-	if _dirty & DIRTY_BIOMASS:
-		_float_data.append(biomass)
-		biomass = 0.0
-	
-	if _dirty & DIRTY_DIVERSITY_MODEL:
-		_int_data.append(diversity_model.size())
-		for key: int in diversity_model: # has changes only
-			_int_data.append(key)
-			_float_data.append(diversity_model[key])
-		diversity_model.clear()
-	_dirty = 0
-
-
-func add_server_delta(data: Array) -> void:
-	# any target; reference safe
-	
-	_int_data = data[0]
-	_float_data = data[1]
-	
-	_int_offset = _int_data[10]
-	_float_offset = _int_data[11]
-	
-	var svr_qtr := _int_data[0]
-	run_qtr = svr_qtr # TODO: histories
-	
-	var flags := _int_data[_int_offset]
-	_int_offset += 1
-	if flags & DIRTY_BIOPRODUCTIVITY:
-		bioproductivity += _float_data[_float_offset]
-		_float_offset += 1
-	if flags & DIRTY_BIOMASS:
-		biomass += _float_data[_float_offset]
-		_float_offset += 1
-	
-	if flags & DIRTY_DIVERSITY_MODEL:
-		var size := _int_data[_int_offset]
-		_int_offset += 1
-		var i := 0
-		while i < size:
-			var key := _int_data[_int_offset]
-			_int_offset += 1
-			var change := _float_data[_float_offset]
-			_float_offset += 1
-			if diversity_model.has(key):
-				diversity_model[key] += change
-				if diversity_model[key] == 0.0:
-					diversity_model.erase(key)
-			else:
-				diversity_model[key] = change
-			i += 1
 

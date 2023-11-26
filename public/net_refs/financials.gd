@@ -54,14 +54,11 @@ func _init(is_new := false) -> void:
 	accountings = ivutils.init_array(n_accountings, 0.0, TYPE_FLOAT)
 
 
-func take_delta(data: Array) -> void:
+func take_dirty(data: Array) -> void:
 	# save delta in data, apply & zero delta, reset dirty flags
 	
-	_int_data = data[0]
-	_float_data = data[1]
-	
-	_int_data[6] = _int_data.size()
-	_int_data[7] = _float_data.size()
+	_int_data = data[1]
+	_float_data = data[2]
 	
 	_int_data.append(_dirty)
 	if _dirty & DIRTY_REVENUE:
@@ -75,14 +72,12 @@ func take_delta(data: Array) -> void:
 	_dirty_accountings = 0
 
 
-func add_delta(data: Array) -> void:
+func add_dirty(data: Array, int_offset: int, float_offset: int) -> void:
 	# apply delta & dirty flags
-	
-	_int_data = data[0]
-	_float_data = data[1]
-	
-	_int_offset = _int_data[6]
-	_float_offset = _int_data[7]
+	_int_data = data[1]
+	_float_data = data[2]
+	_int_offset = int_offset
+	_float_offset = float_offset
 	
 	var svr_qtr := _int_data[0]
 	run_qtr = svr_qtr # TODO: histories
@@ -95,46 +90,4 @@ func add_delta(data: Array) -> void:
 		_float_offset += 1
 	
 	_dirty_accountings |= _add_floats_delta(accountings)
-
-
-# REMOVE BELOW!
-
-func take_server_delta(data: Array) -> void:
-	# facility accumulator only; zero accumulators and dirty flags
-	
-	_int_data = data[0]
-	_float_data = data[1]
-	
-	_int_data[6] = _int_data.size() # int_offset
-	_int_data[7] = _float_data.size() # float_offset
-	
-	_int_data.append(_dirty)
-	if _dirty & DIRTY_REVENUE:
-		_float_data.append(revenue)
-		revenue = 0.0
-	_dirty = 0
-	
-	_append_and_zero_dirty_floats(accountings, _dirty_accountings)
-	_dirty_accountings = 0
-
-
-func add_server_delta(data: Array) -> void:
-	# any target; reference safe
-	
-	_int_data = data[0]
-	_float_data = data[1]
-	
-	_int_offset = _int_data[6]
-	_float_offset = _int_data[7]
-	
-	var svr_qtr := _int_data[0]
-	run_qtr = svr_qtr # TODO: histories
-	
-	var flags := _int_data[_int_offset]
-	_int_offset += 1
-	if flags & DIRTY_REVENUE:
-		revenue += _float_data[_float_offset]
-		_float_offset += 1
-	
-	_add_dirty_floats(accountings)
 

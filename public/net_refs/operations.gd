@@ -477,14 +477,11 @@ func set_est_gross_margin(type: int, value: float) -> void:
 # ********************************** SYNC *************************************
 
 # NEW!
-func take_delta(data: Array) -> void:
+func take_dirty(data: Array) -> void:
 	# save delta in data, apply & zero delta, reset dirty flags
 	
-	_int_data = data[0]
-	_float_data = data[1]
-	
-	_int_data[2] = _int_data.size()
-	_int_data[3] = _float_data.size()
+	_int_data = data[1]
+	_float_data = data[2]
 	
 	_int_data.append(_dirty)
 	if _dirty & DIRTY_LFQ_REVENUE:
@@ -544,13 +541,12 @@ func take_delta(data: Array) -> void:
 	_dirty_op_logics_2 = 0
 
 
-func add_delta(data: Array) -> void:
+func add_dirty(data: Array, int_offset: int, float_offset: int) -> void:
 	# apply delta & dirty flags
-	_int_data = data[0]
-	_float_data = data[1]
-	
-	_int_offset = _int_data[2]
-	_float_offset = _int_data[3]
+	_int_data = data[1]
+	_float_data = data[2]
+	_int_offset = int_offset
+	_float_offset = float_offset
 	
 	var svr_qtr := _int_data[0]
 	run_qtr = svr_qtr # TODO: histories
@@ -609,109 +605,4 @@ func sync_interface_dirty(_data: Array) -> void:
 	pass
 	#_set_dirty(data, op_commands)
 	#_set_dirty(data, op_commands, 64)
-
-
-# REMOVE BELOW!
-
-func take_server_delta(data: Array) -> void:
-	# facility accumulator only; zero accumulators and dirty flags
-	
-	_int_data = data[0]
-	_float_data = data[1]
-	
-	_int_data[2] = _int_data.size()
-	_int_data[3] = _float_data.size()
-	
-	_int_data.append(_dirty)
-	if _dirty & DIRTY_LFQ_REVENUE:
-		_float_data.append(lfq_revenue)
-		lfq_revenue = 0.0
-	if _dirty & DIRTY_LFQ_GROSS_OUTPUT:
-		_float_data.append(lfq_gross_output)
-		lfq_gross_output = 0.0
-	if _dirty & DIRTY_LFQ_NET_INCOME:
-		_float_data.append(lfq_net_income)
-		lfq_net_income = 0.0
-	if _dirty & DIRTY_CONSTRUCTIONS:
-		_float_data.append(constructions)
-		constructions = 0.0
-	
-	_append_and_zero_dirty_floats(crews, _dirty_crews)
-	_append_and_zero_dirty_floats(capacities, _dirty_capacities_1)
-	_append_and_zero_dirty_floats(capacities, _dirty_capacities_2, 64)
-	_append_and_zero_dirty_floats(rates, _dirty_rates_1)
-	_append_and_zero_dirty_floats(rates, _dirty_rates_2, 64)
-	_append_and_zero_dirty_floats(est_revenues, _dirty_est_revenues_1)
-	_append_and_zero_dirty_floats(est_revenues, _dirty_est_revenues_2, 64)
-	_append_and_zero_dirty_floats(est_gross_incomes, _dirty_est_gross_incomes_1)
-	_append_and_zero_dirty_floats(est_gross_incomes, _dirty_est_gross_incomes_2, 64)
-	_append_dirty_floats(est_gross_margins, _dirty_est_gross_margins_1) # not accumulator!
-	_append_dirty_floats(est_gross_margins, _dirty_est_gross_margins_2, 64) # not accumulator!
-	_append_dirty_ints(op_logics, _dirty_op_logics_1) # not accumulator!
-	_append_dirty_ints(op_logics, _dirty_op_logics_2, 64) # not accumulator!
-	
-	_dirty = 0
-	_dirty_crews = 0
-	_dirty_capacities_1 = 0
-	_dirty_capacities_2 = 0
-	_dirty_rates_1 = 0
-	_dirty_rates_2 = 0
-	_dirty_est_revenues_1 = 0
-	_dirty_est_revenues_2 = 0
-	_dirty_est_gross_incomes_1 = 0
-	_dirty_est_gross_incomes_2 = 0
-	_dirty_est_gross_margins_1 = 0
-	_dirty_est_gross_margins_2 = 0
-	_dirty_op_logics_1 = 0
-	_dirty_op_logics_2 = 0
-
-
-func add_server_delta(data: Array) -> void:
-	# any target
-	
-	_int_data = data[0]
-	_float_data = data[1]
-	
-	_int_offset = _int_data[2]
-	_float_offset = _int_data[3]
-	
-	var svr_qtr := _int_data[0]
-	run_qtr = svr_qtr # TODO: histories
-		
-	var flags := _int_data[_int_offset]
-	_int_offset += 1
-	if flags & DIRTY_LFQ_REVENUE:
-		lfq_revenue += _float_data[_float_offset]
-		_float_offset += 1
-	if flags & DIRTY_LFQ_GROSS_OUTPUT:
-		lfq_gross_output += _float_data[_float_offset]
-		_float_offset += 1
-	if flags & DIRTY_LFQ_NET_INCOME:
-		lfq_net_income += _float_data[_float_offset]
-		_float_offset += 1
-	if flags & DIRTY_CONSTRUCTIONS:
-		constructions += _float_data[_float_offset]
-		_float_offset += 1
-	
-	_add_dirty_floats(crews)
-	_add_dirty_floats(capacities)
-	_add_dirty_floats(capacities, 64)
-	_add_dirty_floats(rates)
-	_add_dirty_floats(rates, 64)
-	if !has_financials:
-		return
-	_add_dirty_floats(est_revenues)
-	_add_dirty_floats(est_revenues, 64)
-	_add_dirty_floats(est_gross_incomes)
-	_add_dirty_floats(est_gross_incomes, 64)
-	if !is_facility:
-		return
-	_set_dirty_floats(est_gross_margins) # not accumulator!
-	_set_dirty_floats(est_gross_margins, 64) # not accumulator!
-	_set_dirty_ints(op_logics) # not accumulator!
-	_set_dirty_ints(op_logics, 64) # not accumulator!
-
-
-
-
 

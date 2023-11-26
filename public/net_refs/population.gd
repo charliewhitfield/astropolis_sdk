@@ -197,14 +197,11 @@ func set_carrying_capacity(carrying_capacity_group: int, value: float) -> void:
 # ********************************* SYNC **************************************
 
 
-func take_delta(data: Array) -> void:
+func take_dirty(data: Array) -> void:
 	# save delta in data, apply & zero delta, reset dirty flags
 	
-	_int_data = data[0]
-	_float_data = data[1]
-	
-	_int_data[8] = _int_data.size()
-	_int_data[9] = _float_data.size()
+	_int_data = data[1]
+	_float_data = data[2]
 	
 	_take_floats_delta(numbers, delta_numbers, _dirty_numbers)
 	
@@ -224,14 +221,12 @@ func take_delta(data: Array) -> void:
 	_dirty_emigration_pressures = 0
 
 
-func add_delta(data: Array) -> void:
-	# any target; reference safe
-	
-	_int_data = data[0]
-	_float_data = data[1]
-	
-	_int_offset = _int_data[8]
-	_float_offset = _int_data[9]
+func add_dirty(data: Array, int_offset: int, float_offset: int) -> void:
+	# apply delta & dirty flags
+	_int_data = data[1]
+	_float_data = data[2]
+	_int_offset = int_offset
+	_float_offset = float_offset
 	
 	var svr_qtr: int = _int_data[0]
 	if run_qtr < svr_qtr:
@@ -242,59 +237,10 @@ func add_delta(data: Array) -> void:
 	if !is_facility:
 		return
 	
-	_add_dirty_floats(intrinsic_growths)
-	_add_dirty_floats(carrying_capacities)
-	_add_dirty_floats(immigration_attractions)
-	_add_dirty_floats(emigration_pressures)
-
-
-
-
-# REMOVE BELOW!
-
-func take_server_delta(data: Array) -> void:
-	# facility accumulator only; zero values and dirty flags
-	
-	_int_data = data[0]
-	_float_data = data[1]
-	
-	_int_data[8] = _int_data.size()
-	_int_data[9] = _float_data.size()
-	
-	_append_and_zero_dirty_floats(numbers, _dirty_numbers)
-	_dirty_numbers = 0
-	_append_and_zero_dirty_floats(intrinsic_growths, _dirty_intrinsic_growths)
-	_dirty_intrinsic_growths = 0
-	_append_and_zero_dirty_floats(carrying_capacities, _dirty_carrying_capacities)
-	_dirty_carrying_capacities = 0
-	_append_and_zero_dirty_floats(immigration_attractions, _dirty_immigration_attractions)
-	_dirty_immigration_attractions = 0
-	_append_and_zero_dirty_floats(emigration_pressures, _dirty_emigration_pressures)
-	_dirty_emigration_pressures = 0
-
-
-func add_server_delta(data: Array) -> void:
-	# any target; reference safe
-	
-	_int_data = data[0]
-	_float_data = data[1]
-	
-	_int_offset = _int_data[8]
-	_float_offset = _int_data[9]
-	
-	var svr_qtr: int = _int_data[0]
-	if run_qtr < svr_qtr:
-		_update_history(svr_qtr) # before new quarter changes
-	
-	_add_dirty_floats(numbers)
-	
-	if !is_facility:
-		return
-	
-	_add_dirty_floats(intrinsic_growths)
-	_add_dirty_floats(carrying_capacities)
-	_add_dirty_floats(immigration_attractions)
-	_add_dirty_floats(emigration_pressures)
+	_dirty_intrinsic_growths |= _set_floats_dirty(intrinsic_growths)
+	_dirty_carrying_capacities |= _set_floats_dirty(carrying_capacities)
+	_dirty_immigration_attractions |= _set_floats_dirty(immigration_attractions)
+	_dirty_emigration_pressures |= _set_floats_dirty(emigration_pressures)
 
 
 func _update_history(svr_qtr: int) -> void:

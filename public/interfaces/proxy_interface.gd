@@ -137,27 +137,3 @@ func set_server_init(data: Array) -> void:
 		metaverse.set_server_init(metaverse_data)
 
 
-func propagate_server_delta(data: Array) -> void:
-	# only components we already have
-	var int_data: Array[int] = data[0]
-	var dirty: int = int_data[1]
-	if operations and dirty & DIRTY_OPERATIONS:
-		operations.add_server_delta(data)
-	if inventory and dirty & DIRTY_INVENTORY:
-		inventory.add_server_delta(data)
-	if financials and dirty & DIRTY_FINANCIALS:
-		financials.add_server_delta(data)
-	if population and dirty & DIRTY_POPULATION:
-		population.add_server_delta(data)
-	if biome and dirty & DIRTY_BIOME:
-		biome.add_server_delta(data)
-	if metaverse and dirty & DIRTY_METAVERSE:
-		metaverse.add_server_delta(data)
-	assert(int_data[0] >= run_qtr)
-	if int_data[0] > run_qtr:
-		if run_qtr == -1:
-			run_qtr = int_data[0]
-		else:
-			run_qtr = int_data[0]
-			process_ai_new_quarter() # after component histories have updated
-
