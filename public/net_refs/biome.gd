@@ -9,6 +9,8 @@ extends NetRef
 # will have access to API (just like any Godot class) but the GDScript class
 # will be removed.
 #
+# TODO: Make interface component w/out server dirty flags & delta accumulators
+#
 
 enum { # _dirty
 	DIRTY_BIOPRODUCTIVITY = 1,
@@ -19,39 +21,43 @@ enum { # _dirty
 
 # save/load persistence for server only
 const PERSIST_PROPERTIES2: Array[StringName] = [
-	&"bioproductivity",
-	&"biomass",
-	&"diversity_model",
-	
-	&"delta_bioproductivity",
-	&"delta_biomass",
-	&"delta_diversity_model",
+	&"_bioproductivity",
+	&"_delta_bioproductivity",
+	&"_biomass",
+	&"_delta_biomass",
+	&"_diversity_model",
+	&"_delta_diversity_model",
 ]
 
-var bioproductivity := 0.0
-var biomass := 0.0
-var diversity_model: Dictionary # see static/diversity.gd
+var _bioproductivity := 0.0
+var _delta_bioproductivity := 0.0
+var _biomass := 0.0
+var _delta_biomass := 0.0
+var _diversity_model: Dictionary # see static/diversity.gd
+var _delta_diversity_model: Dictionary
 
 # TODO: histories for all dev stats
-
-# accumulators
-var delta_bioproductivity := 0.0
-var delta_biomass := 0.0
-var delta_diversity_model: Dictionary
-
 
 
 func _init(is_new := false) -> void:
 	if !is_new: # game load
 		return
-	diversity_model = {}
+	_diversity_model = {}
 
 # ********************************** READ *************************************
 # NOT all threadsafe!
 
+func get_bioproductivity() -> float:
+	return _bioproductivity + _delta_bioproductivity
+
+
+func get_biomass() -> float:
+	return _biomass + _delta_biomass
+
+
 func get_development_biodiversity() -> float:
 	# NOT THREADSAFE !!!!
-	var entropy := diversity.get_shannon_entropy_2(diversity_model, delta_diversity_model, false)
+	var entropy := diversity.get_shannon_entropy_2(_diversity_model, _delta_diversity_model, false)
 	if entropy == 0.0:
 		return 0.0 # no species; not technically correct but intuitive
 	return exp(entropy)
@@ -60,13 +66,13 @@ func get_development_biodiversity() -> float:
 func get_species_richness() -> float:
 	# NOT THREADSAFE !!!!
 	# total number of species
-	return diversity.get_species_richness_2(diversity_model, delta_diversity_model)
+	return diversity.get_species_richness_2(_diversity_model, _delta_diversity_model)
  
 # ****************************** SERVER MODIFY ********************************
 
 func change_diversity_model(key: int, change: float) -> void:
-	diversity.change_model(delta_diversity_model, key, change)
-	assert(_debug_assert_diversity_model_change(diversity_model, delta_diversity_model, key))
+	diversity.change_model(_delta_diversity_model, key, change)
+	assert(_debug_assert_diversity_model_change(_diversity_model, _delta_diversity_model, key))
 	_dirty |= DIRTY_DIVERSITY_MODEL
 
 # ********************************** SYNC *************************************
@@ -80,15 +86,15 @@ func take_dirty(data: Array) -> void:
 	
 	_int_data.append(_dirty)
 	if _dirty & DIRTY_BIOPRODUCTIVITY:
-		_float_data.append(delta_bioproductivity)
-		bioproductivity += delta_bioproductivity
-		delta_bioproductivity = 0.0
+		_float_data.append(_delta_bioproductivity)
+		_bioproductivity += _delta_bioproductivity
+		_delta_bioproductivity = 0.0
 	if _dirty & DIRTY_BIOMASS:
-		_float_data.append(delta_biomass)
-		biomass += delta_biomass
-		delta_biomass = 0.0
+		_float_data.append(_delta_biomass)
+		_biomass += _delta_biomass
+		_delta_biomass = 0.0
 	if _dirty & DIRTY_DIVERSITY_MODEL:
-		_take_diversity_model_delta(diversity_model, delta_diversity_model)
+		_take_diversity_model_delta(_diversity_model, _delta_diversity_model)
 	
 	_dirty = 0
 
@@ -108,12 +114,12 @@ func add_dirty(data: Array, int_offset: int, float_offset: int) -> void:
 	_dirty |= dirty
 	
 	if dirty & DIRTY_BIOPRODUCTIVITY:
-		delta_bioproductivity += _float_data[_float_offset]
+		_delta_bioproductivity += _float_data[_float_offset]
 		_float_offset += 1
 	if dirty & DIRTY_BIOMASS:
-		delta_biomass += _float_data[_float_offset]
+		_delta_biomass += _float_data[_float_offset]
 		_float_offset += 1
 	if dirty & DIRTY_DIVERSITY_MODEL:
-		_add_diversity_model_delta(delta_diversity_model)
+		_add_diversity_model_delta(_delta_diversity_model)
 
 

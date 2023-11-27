@@ -84,7 +84,7 @@ func get_development_population(population_type := -1) -> float:
 
 func get_development_economy() -> float:
 	if operations:
-		return operations.lfq_gross_output
+		return operations.get_lfq_gross_output()
 	return 0.0
 
 
@@ -102,13 +102,13 @@ func get_development_manufacturing() -> float:
 
 func get_development_constructions() -> float:
 	if operations:
-		return operations.constructions
+		return operations.get_constructions()
 	return 0.0
 
 
 func get_development_computations() -> float:
 	if metaverse:
-		return metaverse.computations
+		return metaverse.get_computations()
 	return 0.0
 
 
@@ -120,13 +120,13 @@ func get_development_information() -> float:
 
 func get_development_bioproductivity() -> float:
 	if biome:
-		return biome.bioproductivity
+		return biome.get_bioproductivity()
 	return 0.0
 
 
 func get_development_biomass() -> float:
 	if biome:
-		return biome.biomass
+		return biome.get_biomass()
 	return 0.0
 
 
