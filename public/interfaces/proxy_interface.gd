@@ -137,3 +137,36 @@ func set_server_init(data: Array) -> void:
 		metaverse.set_server_init(metaverse_data)
 
 
+func sync_server_dirty(data: Array) -> void:
+	
+	var offsets: Array[int] = data[0]
+	var int_data: Array[int] = data[1]
+	var dirty: int = offsets[0]
+	var k := 1 # offsets offset
+	
+	if dirty & DIRTY_OPERATIONS:
+		operations.add_dirty(data, offsets[k], offsets[k + 1])
+		k += 2
+	if dirty & DIRTY_INVENTORY:
+		inventory.add_dirty(data, offsets[k], offsets[k + 1])
+		k += 2
+	if dirty & DIRTY_FINANCIALS:
+		financials.add_dirty(data, offsets[k], offsets[k + 1])
+		k += 2
+	if dirty & DIRTY_POPULATION:
+		population.add_dirty(data, offsets[k], offsets[k + 1])
+		k += 2
+	if dirty & DIRTY_BIOME:
+		biome.add_dirty(data, offsets[k], offsets[k + 1])
+		k += 2
+	if dirty & DIRTY_METAVERSE:
+		metaverse.add_dirty(data, offsets[k], offsets[k + 1])
+	
+	assert(int_data[0] >= run_qtr)
+	if int_data[0] > run_qtr:
+		if run_qtr == -1:
+			run_qtr = int_data[0]
+		else:
+			run_qtr = int_data[0]
+			process_ai_new_quarter() # after component histories have updated
+

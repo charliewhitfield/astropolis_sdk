@@ -151,9 +151,9 @@ func sync_server_dirty(data: Array) -> void:
 	var k := 1 # offsets offset
 	
 	if dirty & DIRTY_BASE:
-		player_class = int_data[1]
 		var string_data: Array[String] = data[3]
 		gui_name = string_data[0]
+		player_class = int_data[1]
 		var part_of_name := string_data[1]
 		part_of = interfaces_by_name[part_of_name] if part_of_name else null
 		polity_name = string_data[2]

@@ -284,13 +284,14 @@ func sync_server_dirty(data: Array) -> void:
 	if dirty & DIRTY_COMPOSITIONS:
 		var dirty_compositions := offsets[k]
 		k += 1
+		var i := 0
 		while dirty_compositions:
-			var lsb := dirty_compositions & -dirty_compositions
-			var i: int = LOG2_64[lsb]
-			var composition: Composition = compositions[i]
-			composition.add_dirty(data, offsets[k], offsets[k + 1])
-			k += 2
-			dirty_compositions &= ~lsb
+			if dirty_compositions & 1:
+				var composition: Composition = compositions[i]
+				composition.add_dirty(data, offsets[k], offsets[k + 1])
+				k += 2
+			i += 1
+			dirty_compositions >>= 1
 	
 	
 	assert(int_data[0] >= run_qtr)
