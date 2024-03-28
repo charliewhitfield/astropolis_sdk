@@ -3,11 +3,12 @@
 * [World population and agency employees](#World-population-and-agency-employees)
 * [Solar and other renewable energy generation](#Solar-and-other-renewable-energy-generation)
 * [ISS and Tiangong](#ISS-and-Tiangong)
-* [Oil and gas extraction](#Oil-and-gas-extraction)
-* [Coal mining](#Coal-mining)
-* [Uranium mining](#Uranium-mining)
-* [Industrial metals](#Industrial-metals)
-* [Precious metals and rare earths](#Precious-metals-and-rare-earths)
+* [Oil and Gas](#Oil-and-Gas)
+* [Coal](#Coal)
+* [Uranium](#Uranium)
+* [Industrial Metals](#Industrial-Metals)
+* [Precious Metals and Rare Earths](#Precious-Metals-and-Rare-Earths)
+* [Industrial Minerals](#Industrial-Minerals)
 
 ## General Notes
 
@@ -315,7 +316,7 @@ The International Space Station (ISS) is constructed using various materials, ea
 
 It's important to note that these percentages are approximate and may vary depending on the specific modules and components being considered. Additionally, as the ISS continues to evolve and new modules and equipment are added, the overall composition percentages may change over time.
 
-## Oil and gas extraction
+## Oil and Gas
 
 The energy required to extract oil and gas can vary significantly depending on the location, method of extraction, and the specific characteristics of the reservoir. However, I can provide you with some general information and estimates.
 
@@ -466,7 +467,7 @@ For example, a study by the U.S. Energy Information Administration (EIA) found t
 
 In summary, while the exact relationship between depth and energy input varies, deeper oil and gas wells generally require significantly more energy to drill and extract compared to shallower wells.
 
-## Coal mining
+## Coal
 
 The economics of coal mining involve a range of inputs and costs that can vary based on factors such as the type of mine (surface or underground), geological conditions, labor costs, and regulatory requirements in the region of operation. Here's a general breakdown of the main inputs and costs involved in extracting one tonne of coal:
 
@@ -526,7 +527,7 @@ Byproducts:
 
 It's important to note that these figures are rough estimates and can vary significantly depending on the specific conditions at each mine. Additionally, the management and disposal of these byproducts can have significant environmental impacts, such as air and water pollution, greenhouse gas emissions, and land disturbance.
 
-## Uranium mining
+## Uranium
 
 Here is a table showing worldwide uranium mining methods, quantities, concentrations, and energy requirements:
 
@@ -654,7 +655,7 @@ Secondary Products:
 
 It is important to note that the actual quantities of these secondary products recovered from uranium ore mining depend on various factors, such as the specific composition of the ore, the mining and processing methods employed, and the economic viability of extracting these byproducts.
 
-## Industrial metals
+## Industrial Metals
 
 Here is a table summarizing worldwide mining data for some of the most important industrial metals:
 
@@ -1019,7 +1020,7 @@ It's important to note that the prices for concentrates, intermediate products, 
 
 In practice, the actual prices may vary depending on the specific grade, impurities, and other factors. Higher-grade ores or concentrates may command a premium over the benchmark prices, while lower-grade materials may be discounted.
 
-## Precious metals and rare earths
+## Precious Metals and Rare Earths
 
 Here is a list of some common precious metals, rare earth elements, and the ores from which they are obtained, along with typical grades:
 
@@ -1238,6 +1239,251 @@ Year 2030 (projected):
 | Total      | 1,000    | 967  | 10,000     | 9,250  | 28.8         | 26.3     | 113.2         | 104       | 275,000 | 3500 | 17,500        | 19.63          |
 
 These projections are based on current trends and estimates, but actual numbers may vary depending on various factors such as changes in demand, technological advancements, new discoveries, and geopolitical situations.
+
+## Industrial Minerals
+
+Here is a list of some key industrial minerals and other non-metal, non-coal mined substances, along with information on their ores, grades, mining, and occurrence:
+
+1. Phosphate 
+- Ores: Phosphate rock (sedimentary marine phosphorites), grades of 15-30% P2O5
+- Mining: Strip mining, 90% from surface mines
+- Overburden/waste: 30-40% of mined material 
+- Occurrence: 75% of reserves in Morocco and Western Sahara, also deposits in China, Algeria, Syria, Brazil, South Africa
+
+2. Potash (Potassium)
+- Ores: Sylvinite (KCl), grades of 25-30% K2O 
+- Mining: Underground mining, solution mining
+- Overburden/waste: Salt tailings 
+- Occurrence: Canada (Saskatchewan) has 50% of global reserves, Russia, Belarus, China, Germany also major
+
+3. Sulfur
+- Ores: Elemental sulfur deposits (cap rock), hydrogen sulfide from sour gas/oil 
+- Mining: Frasch process on sulfur deposits, recovery from oil/gas
+- Occurrence: Widespread, U.S. (Texas, Louisiana), Mexico, Poland, Russia, China
+
+4. Limestone 
+- Ores: Sedimentary limestone/dolomite
+- Mining: Quarrying, 80% surface mined  
+- Overburden/waste: 20-30% 
+- Occurrence: Widely distributed
+
+5. Borates
+- Ores: Borax, kernite, ulexite; grades of 25-35% B2O3
+- Mining: Open pit mining 
+- Overburden/waste: 40-60%
+- Occurrence: Concentrated in arid regions; Turkey has 70% of reserves, U.S., Argentina, Chile, Russia, China
+
+6. Kaolin (China Clay)
+- Ores: Kaolinite clay deposits
+- Mining: Open pit mining, hydraulic mining
+- Overburden/waste: 30-50% 
+- Occurrence: U.S. (Georgia), Brazil, UK, Iran, Germany, China, India
+
+7. Barite
+- Ores: Barite (BaSO4), typical grades of 95% barite
+- Mining: Underground and surface mining
+- Overburden/waste: 40-60%
+- Occurrence: China, India, U.S., Morocco, Mexico, Iran
+
+8. Industrial Sand
+- Ores: Silica sand deposits, >95% SiO2 
+- Mining: Surface mining, 40% dredging/hydraulic mining
+- Overburden/waste: 20-30%
+- Occurrence: Widespread; U.S., Germany, UK, Australia
+
+On other planetary bodies, there is evidence for useful mineral deposits but little detailed information compared to Earth. Mars likely has sulfur and silica sand deposits. The Moon has anorthite deposits (aluminum silicate). Some asteroids are rich in clays and hydrated silicate minerals.
+
+This covers some of the key industrial minerals mined globally. The exact overburden ratios, waste percentages, and ore grades can vary significantly between individual deposits. Mining and processing methods also differ based on the specific mineral and deposit characteristics. Let me know if you need any clarification or have additional questions!
+
+****
+
+Here is the approximate energy input required for mining and refining the ores into purified industrial substances, in units of MWh per tonne:
+
+1. Phosphate
+- Mining: 0.01-0.03 MWh/tonne of ore
+- Refining (to phosphoric acid): 0.2-0.3 MWh/tonne of phosphate rock
+
+2. Potash (Potassium)
+- Mining: 0.03-0.05 MWh/tonne of ore
+- Refining (to potassium chloride): 0.1-0.2 MWh/tonne of potash ore
+
+3. Sulfur
+- Frasch process: 1.5-2.5 MWh/tonne of sulfur
+- Recovery from oil/gas: 0.1-0.2 MWh/tonne of sulfur
+
+4. Limestone
+- Mining: 0.01-0.02 MWh/tonne of ore
+- Processing (to quicklime): 0.1-0.2 MWh/tonne of limestone
+
+5. Borates
+- Mining: 0.02-0.04 MWh/tonne of ore
+- Refining (to boric acid): 0.5-0.8 MWh/tonne of borate ore
+
+6. Kaolin (China Clay)
+- Mining: 0.02-0.04 MWh/tonne of ore
+- Processing (to refined kaolin): 0.3-0.5 MWh/tonne of kaolin
+
+7. Barite
+- Mining: 0.02-0.03 MWh/tonne of ore
+- Processing (to drilling-grade barite): 0.05-0.1 MWh/tonne of barite
+
+8. Industrial Sand
+- Mining: 0.01-0.02 MWh/tonne of ore
+- Processing (to silica sand): 0.05-0.1 MWh/tonne of sand
+
+Please note that these figures are rough estimates and can vary significantly depending on factors such as the specific deposit characteristics, mining methods, processing technologies, and energy sources used. The energy requirements for refining generally exceed those for mining, as the refining processes often involve energy-intensive steps like heating, calcination, or electrolysis.
+
+Additionally, there are indirect energy inputs associated with the production and transportation of reagents, the manufacture and maintenance of equipment, and the transportation of the mined and refined products to their end-use locations. These indirect energy inputs can be significant but are difficult to quantify on a per-tonne basis.
+
+****
+
+Here is a table of target substances and ores traded as commodities, including their assumed grade or quality, total worldwide production, and market prices (in USD per tonne) for 2000, 2010, 2020, and 2030 (projected):
+
+| Substance/Ore | Grade/Quality | World Production (Mt/yr) | Price 2000 (USD/t) | Price 2010 (USD/t) | Price 2020 (USD/t) | Price 2030 (USD/t, proj.) |
+|---------------|---------------|--------------------------|--------------------|--------------------|--------------------|-----------------------------|
+| Phosphate Rock | 30% P2O5     | 240                      | 33                 | 125                | 76                 | 95                          |
+| Phosphoric Acid | 70% P2O5    | 45                       | 470                | 885                | 690                | 850                         |
+| Potash (KCl)   | 60% K2O      | 75                       | 115                | 335                | 230                | 300                         |
+| Sulfur         | 99.5% S      | 80                       | 30                 | 165                | 65                 | 90                          |
+| Limestone      | 95% CaCO3    | 5,000                    | 7                  | 10                 | 12                 | 15                          |
+| Quicklime      | 95% CaO      | 430                      | 60                 | 100                | 120                | 150                         |
+| Borates        | 35% B2O3     | 6                        | 370                | 570                | 730                | 900                         |
+| Boric Acid     | 99.5% H3BO3  | 2                        | 900                | 1,250              | 1,500              | 1,800                       |
+| Kaolin         | 85% Kaolinite| 40                       | 100                | 140                | 180                | 230                         |
+| Barite         | 95% BaSO4    | 9                        | 50                 | 85                 | 120                | 150                         |
+| Silica Sand    | 99.5% SiO2   | 300                      | 20                 | 35                 | 50                 | 70                          |
+
+Please note that the prices and production figures are approximate and can vary based on factors such as market conditions, currency fluctuations, and data sources. The 2030 prices are projections based on historical trends and anticipated market developments, and actual prices may differ from these projections.
+
+The world production figures represent the approximate global annual production of each substance in million tonnes per year (Mt/yr). For some substances (e.g., phosphoric acid, quicklime, boric acid), the production figure represents the amount of the refined product, while for others (e.g., phosphate rock, limestone, barite), it represents the amount of ore mined.
+
+****
+
+Table 1: Total Ore Output by Region (Million Tonnes)
+
+| Ore/Region | USA | Russia | EU+UK | China | India | Japan | Other | Total |
+|------------|-----|--------|-------|-------|-------|-------|-------|-------|
+| Phosphate Rock |    |        |       |       |       |       |       |       |
+| 2000       | 38  | 11     | 2     | 20    | 5     | 0     | 44    | 120   |
+| 2010       | 28  | 11     | 1     | 68    | 5     | 0     | 67    | 180   |
+| Potash (KCl) |    |        |       |       |       |       |       |       |
+| 2000       | 1   | 4      | 5     | 0     | 0     | 0     | 20    | 30    |
+| 2010       | 1   | 6      | 4     | 3     | 0     | 0     | 31    | 45    |
+| Limestone  |     |        |       |       |       |       |       |       |
+| 2000       | 900 | 200    | 800   | 1,000 | 200   | 200   | 700   | 4,000 |
+| 2010       | 800 | 200    | 700   | 1,500 | 300   | 150   | 850   | 4,500 |
+| Borates    |     |        |       |       |       |       |       |       |
+| 2000       | 1   | 0      | 0     | 0     | 0     | 0     | 3     | 4     |
+| 2010       | 1   | 0      | 0     | 0     | 0     | 0     | 4     | 5     |
+| Kaolin     |     |        |       |       |       |       |       |       |
+| 2000       | 10  | 1      | 5     | 3     | 1     | 3     | 7     | 30    |
+| 2010       | 6   | 1      | 4     | 5     | 1     | 3     | 10    | 30    |
+| Barite     |     |        |       |       |       |       |       |       |
+| 2000       | 0.5 | 0.1    | 0.4   | 2     | 0.5   | 0.1   | 1.4   | 5     |
+| 2010       | 0.7 | 0.1    | 0.3   | 4     | 1.4   | 0     | 1.5   | 8     |
+| Silica Sand |    |        |       |       |       |       |       |       |
+| 2000       | 30  | 5      | 50    | 20    | 5     | 5     | 35    | 150   |
+| 2010       | 50  | 10     | 60    | 40    | 10    | 5     | 75    | 250   |
+
+Table 2: Total Refined Product Output by Region (Million Tonnes)
+
+| Product/Region | USA | Russia | EU+UK | China | India | Japan | Other | Total |
+|----------------|-----|--------|-------|-------|-------|-------|-------|-------|
+| Phosphoric Acid |     |        |       |       |       |       |       |       |
+| 2000           | 10  | 3      | 1     | 5     | 2     | 0     | 9     | 30    |
+| 2010           | 8   | 3      | 0.5   | 18    | 2     | 0     | 13.5  | 45    |
+| Sulfur         |     |        |       |       |       |       |       |       |
+| 2000           | 12  | 6      | 8     | 5     | 1     | 3     | 15    | 50    |
+| 2010           | 10  | 7      | 6     | 18    | 2     | 3     | 24    | 70    |
+| Quicklime      |     |        |       |       |       |       |       |       |
+| 2000           | 70  | 20     | 80    | 100   | 20    | 20    | 90    | 400   |
+| 2010           | 60  | 20     | 70    | 150   | 30    | 15    | 105   | 450   |
+| Boric Acid     |     |        |       |       |       |       |       |       |
+| 2000           | 0.5 | 0      | 0     | 0     | 0     | 0     | 0.5   | 1     |
+| 2010           | 0.6 | 0      | 0     | 0     | 0     | 0     | 0.9   | 1.5   |
+
+Please note that these figures are approximate and based on available data and estimates. Actual production values may vary. The "Other" category includes countries not specifically listed, and the "Total" represents the global production for each product or ore.
+
+****
+
+Table 3: Total Ore Output by Region (Million Tonnes)
+
+| Ore/Region | USA | Russia | EU+UK | China | India | Japan | Other | Total |
+|------------|-----|--------|-------|-------|-------|-------|-------|-------|
+| Phosphate Rock |    |        |       |       |       |       |       |       |
+| 2020       | 23  | 14     | 1     | 90    | 6     | 0     | 86    | 220   |
+| 2030 (proj.)| 20  | 15     | 1     | 100   | 8     | 0     | 106   | 250   |
+| Potash (KCl) |    |        |       |       |       |       |       |       |
+| 2020       | 1   | 8      | 3     | 6     | 0     | 0     | 42    | 60    |
+| 2030 (proj.)| 1   | 10     | 3     | 8     | 1     | 0     | 52    | 75    |
+| Limestone  |     |        |       |       |       |       |       |       |
+| 2020       | 700 | 200    | 600   | 2,000 | 400   | 100   | 1,000 | 5,000 |
+| 2030 (proj.)| 650 | 220    | 550   | 2,500 | 500   | 80    | 1,200 | 5,700 |
+| Borates    |     |        |       |       |       |       |       |       |
+| 2020       | 1   | 0      | 0     | 0     | 0     | 0     | 5     | 6     |
+| 2030 (proj.)| 1   | 0      | 0     | 1     | 0     | 0     | 6     | 8     |
+| Kaolin     |     |        |       |       |       |       |       |       |
+| 2020       | 5   | 1      | 3     | 8     | 2     | 3     | 13    | 35    |
+| 2030 (proj.)| 4   | 1      | 2     | 10    | 3     | 2     | 18    | 40    |
+| Barite     |     |        |       |       |       |       |       |       |
+| 2020       | 1   | 0.1    | 0.2   | 5     | 2     | 0     | 1.7   | 10    |
+| 2030 (proj.)| 1.2 | 0.1    | 0.2   | 6     | 2.5   | 0     | 2     | 12    |
+| Silica Sand |    |        |       |       |       |       |       |       |
+| 2020       | 70  | 15     | 70    | 60    | 15    | 5     | 115   | 350   |
+| 2030 (proj.)| 90  | 20     | 80    | 80    | 20    | 5     | 155   | 450   |
+
+Table 4: Total Refined Product Output by Region (Million Tonnes)
+
+| Product/Region | USA | Russia | EU+UK | China | India | Japan | Other | Total |
+|----------------|-----|--------|-------|-------|-------|-------|-------|-------|
+| Phosphoric Acid |     |        |       |       |       |       |       |       |
+| 2020           | 6   | 4      | 0.3   | 24    | 2     | 0     | 18.7  | 55    |
+| 2030 (proj.)   | 5   | 4      | 0.3   | 27    | 3     | 0     | 25.7  | 65    |
+| Sulfur         |     |        |       |       |       |       |       |       |
+| 2020           | 9   | 8      | 5     | 25    | 3     | 3     | 32    | 85    |
+| 2030 (proj.)   | 8   | 9      | 4     | 30    | 4     | 3     | 42    | 100   |
+| Quicklime      |     |        |       |       |       |       |       |       |
+| 2020           | 50  | 20     | 60    | 200   | 40    | 10    | 120   | 500   |
+| 2030 (proj.)   | 45  | 22     | 55    | 250   | 50    | 8     | 140   | 570   |
+| Boric Acid     |     |        |       |       |       |       |       |       |
+| 2020           | 0.7 | 0      | 0     | 0.1   | 0     | 0     | 1.2   | 2     |
+| 2030 (proj.)   | 0.8 | 0      | 0     | 0.2   | 0     | 0     | 1.5   | 2.5   |
+
+Please note that these figures are approximate and based on available data, estimates, and projections. Actual production values may vary. The "Other" category includes countries not specifically listed, and the "Total" represents the global production for each product or ore. The 2030 figures are projections based on current trends and anticipated developments in the industry.
+
+****
+
+Table 5: Total Content of Ores or Related Minerals in Earth's Layers (Percent by Weight)
+
+| Ore/Mineral | Upper Crust | Lower Crust | Mantle | Core |
+|-------------|-------------|-------------|--------|------|
+| Phosphates  | 0.1-0.2     | 0.01-0.05   | <0.01  | -    |
+| Potassium   | 2.8         | 0.5-1.0     | 0.01-0.05 | -    |
+| Sulfur      | 0.05-0.1    | 0.05-0.1    | 0.02-0.05 | 1-2  |
+| Limestone   | 5-10        | 1-3         | 0.1-0.5 | -    |
+| Borates     | 0.001-0.01  | <0.001      | -      | -    |
+| Kaolin      | 1-2         | 0.5-1       | -      | -    |
+| Barite      | 0.05-0.1    | 0.01-0.05   | <0.01  | -    |
+| Silica      | 60-70       | 50-60       | 40-50  | -    |
+
+Table 6: Quantities of Substances in Other Celestial Bodies (Percent by Weight)
+
+| Celestial Body | Phosphates | Potassium | Sulfur | Carbonates | Borates | Clays | Barite | Silica |
+|----------------|------------|-----------|--------|------------|---------|-------|--------|--------|
+| Moon (regolith)| 0.1-0.5    | 0.1-0.3   | 0.05-0.1 | -        | -       | -     | -      | 40-50  |
+| Moon (crust)   | 0.01-0.05  | 0.05-0.1  | 0.01-0.05 | -        | -       | -     | -      | 45-55  |
+| Mars (surface) | 0.5-1      | 0.3-0.6   | 2-5    | 1-2        | -       | 1-2   | -      | 40-50  |
+| Mars (crust)   | 0.1-0.5    | 0.1-0.3   | 1-3    | 0.5-1      | -       | 0.5-1 | -      | 45-55  |
+| Venus (surface)| -          | -         | 0.1-0.5 | -          | -       | -     | -      | 50-60  |
+| Venus (crust)  | -          | -         | 0.05-0.1 | -          | -       | -     | -      | 55-65  |
+| C-type asteroids| 0.1-0.5   | 0.05-0.1  | 1-3    | 1-5        | -       | 5-10  | -      | 20-30  |
+| S-type asteroids| 0.05-0.1  | 0.1-0.3   | 0.5-2  | 0.1-0.5    | -       | 0.5-1 | -      | 40-50  |
+| M-type asteroids| 0.01-0.05 | 0.01-0.05 | 5-10   | -          | -       | -     | -      | 10-20  |
+
+Please note that these figures are approximate and based on available data and estimates. The "-" symbol indicates that the substance is either not present or present in negligible quantities. The data for other celestial bodies is less comprehensive compared to Earth, and actual values may vary.
+
+C-type asteroids are carbonaceous asteroids, S-type are silicaceous asteroids, and M-type are metallic asteroids. The composition of these asteroid types can vary significantly, and the figures provided are rough estimates.
+
 
 
 
