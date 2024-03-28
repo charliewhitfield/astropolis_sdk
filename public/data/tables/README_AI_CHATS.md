@@ -1109,6 +1109,8 @@ Note: ppb = parts per billion, ppm = parts per million. The values provided are 
 
 ****
 
+_(Metal "ores" here are obviously the metal, not the ore.)_
+
 Here are the four tables showing the total ore output and total refined product output by region for years 2000, 2010, 2020, and 2030 (projected) in tonnes per year:
 
 Year 2000:
@@ -1161,5 +1163,58 @@ Year 2030 (projected):
 
 These projections are based on current trends and estimates, but actual numbers may vary depending on various factors such as changes in demand, technological advancements, new discoveries, and geopolitical situations.
 
+****
+
+Precious metal ores and rare earth ores occur in various geological settings, and their distribution and extraction methods can vary significantly depending on the specific deposit type. Here's a detailed breakdown of the occurrence and extraction of these ores:
+
+Precious Metal Ores:
+1. Gold:
+   - Placer deposits (alluvial, eluvial, beach): 10-15% of global production
+     - Overburden: gravel, sand, clay (95-99% by weight)
+     - Ore: gold-bearing sands and gravels (1-5% by weight)
+   - Vein (lode) deposits: 80-85% of global production
+     - Host rock: quartz, carbonates, sulfides (95-99% by weight)
+     - Ore: gold-bearing veins (1-5% by weight)
+   - Carlin-type deposits: 5-10% of global production
+     - Host rock: carbonaceous sedimentary rocks (95-99% by weight)
+     - Ore: disseminated gold in sedimentary rocks (1-5% by weight)
+
+2. Silver:
+   - Vein (lode) deposits: 60-70% of global production
+     - Host rock: quartz, carbonates, sulfides (95-99% by weight)
+     - Ore: silver-bearing veins (1-5% by weight)
+   - Epithermal deposits: 20-25% of global production
+     - Host rock: volcanic rocks (95-99% by weight)
+     - Ore: silver-bearing minerals in volcanic rocks (1-5% by weight)
+   - Sedimentary exhalative (SEDEX) deposits: 10-15% of global production
+     - Host rock: sedimentary rocks (95-99% by weight)
+     - Ore: silver-bearing sulfides in sedimentary rocks (1-5% by weight)
+
+3. Platinum Group Metals (PGMs):
+   - Layered mafic-ultramafic intrusions: 90-95% of global production
+     - Host rock: mafic-ultramafic rocks (95-99% by weight)
+     - Ore: PGM-bearing sulfides (1-5% by weight)
+   - Placer deposits: 5-10% of global production
+     - Overburden: gravel, sand, clay (95-99% by weight)
+     - Ore: PGM-bearing sands and gravels (1-5% by weight)
+
+Rare Earth Ores:
+1. Carbonatites: 40-50% of global production
+   - Host rock: carbonatite intrusions (95-99% by weight)
+   - Ore: rare earth-bearing minerals (1-5% by weight)
+
+2. Ion-adsorption clays: 30-40% of global production
+   - Host rock: weathered granitic rocks (95-99% by weight)
+   - Ore: rare earth-bearing clays (1-5% by weight)
+
+3. Placer deposits: 10-20% of global production
+   - Overburden: gravel, sand, clay (95-99% by weight)
+   - Ore: rare earth-bearing sands and gravels (1-5% by weight)
+
+4. Alkaline igneous rocks: 5-10% of global production
+   - Host rock: alkaline igneous intrusions (95-99% by weight)
+   - Ore: rare earth-bearing minerals (1-5% by weight)
+
+In general, the economically useful deposits of precious metal ores and rare earth ores constitute a small percentage (usually 1-5% by weight) of the total material extracted during mining. The remaining material, such as overburden and waste rock, is typically stored in tailings ponds or used as backfill in underground mines. The specific percentages can vary depending on the deposit type, grade, and mining method employed.
 
 
