@@ -7,6 +7,7 @@
 * [Coal mining](#Coal-mining)
 * [Uranium mining](#Uranium-mining)
 * [Industrial metals](#Industrial-metals)
+* [Precious metals and rare earths](#Precious-metals-and-rare-earths)
 
 ## General Notes
 
@@ -996,6 +997,169 @@ It's important to note that the prices for concentrates, intermediate products, 
 
 In practice, the actual prices may vary depending on the specific grade, impurities, and other factors. Higher-grade ores or concentrates may command a premium over the benchmark prices, while lower-grade materials may be discounted.
 
+## Precious metals and rare earths
+
+Here is a list of some common precious metals, rare earth elements, and the ores from which they are obtained, along with typical grades:
+
+Precious Metals:
+1. Gold (Au)
+   - Ores: Native gold, electrum, tellurides, auriferous pyrite
+   - Typical grade: 1-20 g/t (grams per tonne)
+
+2. Silver (Ag)
+   - Ores: Native silver, argentite, cerargyrite, proustite, pyrargyrite
+   - Typical grade: 50-500 g/t
+
+3. Platinum (Pt)
+   - Ores: Sperrylite, cooperite, braggite
+   - Typical grade: 3-10 g/t
+
+4. Palladium (Pd)
+   - Ores: Braggite, cooperite, vysotskite
+   - Typical grade: 2-10 g/t
+
+Rare Earth Elements (REEs):
+1. Lanthanum (La), Cerium (Ce), Praseodymium (Pr), Neodymium (Nd)
+   - Ores: Monazite, bastnaesite, xenotime
+   - Typical grade: 0.1-10% REO (Rare Earth Oxides)
+
+2. Samarium (Sm), Europium (Eu), Gadolinium (Gd)
+   - Ores: Monazite, bastnaesite, xenotime
+   - Typical grade: 0.1-1% REO
+
+3. Terbium (Tb), Dysprosium (Dy), Holmium (Ho), Erbium (Er), Thulium (Tm), Ytterbium (Yb), Lutetium (Lu)
+   - Ores: Xenotime, ion-adsorption clays
+   - Typical grade: 0.1-1% REO
+
+4. Yttrium (Y)
+   - Ores: Xenotime, ion-adsorption clays
+   - Typical grade: 0.1-1% Y2O3
+
+5. Scandium (Sc)
+   - Ores: Thortveitite, kolbeckite, bazzite
+   - Typical grade: 20-200 ppm (parts per million)
+
+These grades represent the typical ranges for economically viable extraction, but actual grades can vary significantly depending on the specific deposit and mining operation. The rare earth elements are often grouped together as light rare earth elements (LREE) and heavy rare earth elements (HREE) based on their atomic numbers.
+
+****
+
+Here is the updated table with the requested changes:
+
+| Commodity                                  | Assumed Grade        | Price in 2000 (USD/kg) | Price in 2010 (USD/kg) | Price in 2020 (USD/kg) | Price in 2030 (projected) (USD/kg) | Worldwide Production (2020) |
+|--------------------------------------------|--------------------|------------------------|------------------------|------------------------|------------------------------------|-----------------------------|
+| Gold (Au)                                  | 99.5% purity       | $8,975                 | $39,362                | $56,889                | $70,728                            | 3,400 tonnes                |
+| Silver (Ag)                                | 99.9% purity       | $159                   | $649                   | $661                   | $900                               | 25,000 tonnes               |
+| Platinum (Pt)                              | 99.95% purity      | $17,523                | $51,795                | $28,388                | $38,581                            | 180 tonnes                  |
+| Palladium (Pd)                             | 99.95% purity      | $21,893                | $16,871                | $70,486                | $90,000                            | 210 tonnes                  |
+| Rhodium (Rh)                               | 99.9% purity       | $63,966                | $79,046                | $369,677               | $482,261                           | 30 tonnes                   |
+| Gold ore (Auriferous pyrite)               | 5-30 g/t Au        | $0.45-2.69             | $1.97-11.81            | $2.84-17.07            | $3.54-21.22                        | N/A                         |
+| Rare Earth Oxides (REO) - Bastnasite       | 60% REO            | $5.50                  | $20                    | $10                    | $18                                | 240,000 tonnes REO          |
+| Rare Earth Oxides (REO) - Monazite         | 55% REO            | $5.25                  | $18                    | $9                     | $16                                | 30,000 tonnes REO           |
+| Rare Earth Oxides (REO) - Xenotime         | 25% REO            | $6.00                  | $22                    | $12                    | $20                                | 10,000 tonnes REO           |
+| Rare Earth Oxides (REO) - Ion-adsorbed clay| 0.05-0.3% REO      | $7.50                  | $25                    | $15                    | $25                                | 80,000 tonnes REO           |
+| Yttrium Oxide (Y2O3)                       | 99.999% purity     | $85                    | $50                    | $30                    | $45                                | 8,000 tonnes                |
+| Scandium Oxide (Sc2O3)                     | 99.99% purity      | $1,300                 | $5,400                 | $3,800                 | $5,000                             | 15 tonnes                   |
+
+Note: Gold ore prices are based on the contained gold value, assuming a range of grades from 5 to 30 grams per tonne (g/t). The worldwide production figures are estimates based on available data and may not include all sources. Some values are approximated due to limited data availability.
+
+****
+
+The energy input required for mining extraction and refining of gold ore and rare earth ores varies depending on factors such as ore grade, mining method, and processing technology. However, here are some approximate values:
+
+Gold:
+- Mining extraction (underground): 0.2-0.6 MWh/tonne of ore
+- Mining extraction (open pit): 0.1-0.4 MWh/tonne of ore
+- Refining (from ore to 99.5% purity): 10-15 MWh/kg of gold
+
+Rare Earth Ores:
+- Mining extraction (Bastnasite): 0.1-0.3 MWh/tonne of ore
+- Mining extraction (Monazite): 0.1-0.3 MWh/tonne of ore
+- Mining extraction (Xenotime): 0.1-0.3 MWh/tonne of ore
+- Mining extraction (Ion-adsorbed clay): 0.05-0.2 MWh/tonne of ore
+- Refining (from ore to individual rare earth oxides): 1-5 MWh/kg of REO
+
+Yttrium:
+- Refining (from REO to 99.999% purity): 3-7 MWh/kg of yttrium oxide
+
+Scandium:
+- Refining (from REO to 99.99% purity): 5-10 MWh/kg of scandium oxide
+
+Please note that these values are rough estimates and can vary significantly depending on the specific mine, ore characteristics, and processing methods employed. In general, the energy input for refining is much higher than for mining extraction, especially for high-purity products like gold, yttrium, and scandium. The energy intensity of rare earth element production is relatively high compared to other metals due to the complex processing required to separate individual rare earth elements from the mixed ores.
+
+****
+
+Here is a table showing the estimated total content of precious metals and rare earths in Earth's layers and other celestial bodies in our solar system:
+
+| Celestial Body / Layer | Gold (ppb) | Silver (ppb) | Platinum (ppb) | Palladium (ppb) | Total Precious Metals (ppb) | Rare Earths (ppm) | Yttrium (ppm) | Scandium (ppm) |
+|------------------------|------------|--------------|----------------|-----------------|-----------------------------|--------------------|---------------|----------------|
+| Earth's Upper Crust    | 1.3        | 53           | 0.4            | 0.4             | 55.1                        | 150                | 31            | 22             |
+| Earth's Lower Crust    | 0.2        | 25           | 0.2            | 0.2             | 25.6                        | 20                 | 8             | 30             |
+| Earth's Mantle         | 0.1-1      | 5-50         | 1-10           | 1-10            | 7.1-71                      | 1-10               | 2-5           | 10-30          |
+| Earth's Core           | 0.5-5      | 100-1000     | 2-20           | 2-20            | 104.5-1045                  | <0.1               | <0.1          | <0.1           |
+| Moon (Regolith)        | 0.1-1      | 10-100       | 0.1-1          | 0.1-1           | 10.3-103                    | 50-300             | 10-150        | 30-100         |
+| Moon (Crust)           | 0.01-0.1   | 1-10         | 0.01-0.1       | 0.01-0.1        | 1.03-10.3                   | 1-10               | 1-5           | 1-10           |
+| Mars (Crust)           | 0.1-1      | 10-100       | 0.1-1          | 0.1-1           | 10.3-103                    | 1-10               | 1-5           | 1-10           |
+| Venus (Crust)          | 0.1-1      | 10-100       | 0.1-1          | 0.1-1           | 10.3-103                    | 1-10               | 1-5           | 1-10           |
+| Mercury (Crust)        | 0.01-0.1   | 1-10         | 0.01-0.1       | 0.01-0.1        | 1.03-10.3                   | 0.1-1              | 0.1-1         | 0.1-1          |
+| C-type Asteroids       | 100-1000   | 1000-10000   | 100-1000       | 100-1000        | 1300-13000                  | 10-100             | 10-100        | 10-100         |
+| S-type Asteroids       | 10-100     | 100-1000     | 10-100         | 10-100          | 130-1300                    | 1-10               | 1-10          | 1-10           |
+| M-type Asteroids       | 1000-10000 | 10000-100000 | 1000-10000     | 1000-10000      | 13000-130000                | 0.1-1              | 0.1-1         | 0.1-1          |
+
+Note: ppb = parts per billion, ppm = parts per million. The values provided are rough estimates based on limited available data and can vary significantly depending on the specific location and sample. The data for celestial bodies other than Earth are based on remote sensing, meteorite analysis, and theoretical models.
+
+****
+
+Here are the four tables showing the total ore output and total refined product output by region for years 2000, 2010, 2020, and 2030 (projected) in tonnes per year:
+
+Year 2000:
+| Region     | Gold Ore | Gold | Silver Ore | Silver | Platinum Ore | Platinum | Palladium Ore | Palladium | REO Ore | REO  | Yttrium Oxide | Scandium Oxide |
+|------------|----------|------|------------|--------|--------------|----------|---------------|-----------|---------|------|---------------|----------------|
+| USA        | 330      | 335  | 2,000      | 1,860  | 3.5          | 3.3      | 14            | 13        | 5,000   | 72   | 360           | 0.2            |
+| Russia     | 120      | 115  | 1,200      | 1,100  | 25           | 23       | 98            | 90        | 2,000   | 20   | 100           | 0.1            |
+| EU + UK    | 50       | 45   | 1,500      | 1,400  | 0.5          | 0.4      | 2             | 1.8       | 500     | 8    | 40            | 0.05           |
+| China      | 200      | 180  | 2,500      | 2,300  | 1.5          | 1.3      | 6             | 5.4       | 73,000  | 890  | 4,450         | 5              |
+| India      | 30       | 25   | 100        | 90     | 0.1          | 0.1      | 0.4           | 0.3       | 2,700   | 35   | 175           | 0.2            |
+| Japan      | 10       | 8    | 300        | 280    | 0.05         | 0.04     | 0.2           | 0.2       | 200     | 3    | 15            | 0.02           |
+| Other      | 260      | 242  | 2,400      | 2,220  | 4.4          | 4.1      | 17.4          | 16        | 16,600  | 222  | 1,110         | 1.3            |
+| Total      | 1,000    | 950  | 10,000     | 9,250  | 35           | 32.2     | 138           | 126.7     | 100,000 | 1250 | 6,250         | 6.87           |
+
+Year 2010:
+| Region     | Gold Ore | Gold | Silver Ore | Silver | Platinum Ore | Platinum | Palladium Ore | Palladium | REO Ore | REO  | Yttrium Oxide | Scandium Oxide |
+|------------|----------|------|------------|--------|--------------|----------|---------------|-----------|---------|------|---------------|----------------|
+| USA        | 230      | 235  | 1,100      | 1,020  | 3.6          | 3.4      | 14.4          | 13.2      | 1,000   | 13   | 65            | 0.1            |
+| Russia     | 200      | 190  | 1,300      | 1,200  | 26           | 24       | 102           | 93.6      | 1,500   | 16   | 80            | 0.1            |
+| EU + UK    | 30       | 25   | 1,400      | 1,300  | 0.3          | 0.2      | 1.2           | 1.1       | 300     | 5    | 25            | 0.03           |
+| China      | 345      | 320  | 3,500      | 3,250  | 2.5          | 2.3      | 10            | 9.2       | 120,000 | 1480 | 7,400         | 8.3            |
+| India      | 15       | 12   | 200        | 180    | 0.2          | 0.2      | 0.8           | 0.7       | 3,000   | 39   | 195           | 0.2            |
+| Japan      | 8        | 7    | 280        | 260    | 0.04         | 0.03     | 0.16          | 0.15      | 150     | 2    | 10            | 0.01           |
+| Other      | 172      | 161  | 2,220      | 2,040  | 2.4          | 2.2      | 9.44          | 8.65      | 24,050  | 320  | 1,600         | 1.8            |
+| Total      | 1,000    | 950  | 10,000     | 9,250  | 35           | 32.3     | 138           | 126.6     | 150,000 | 1875 | 9,375         | 10.54          |
+
+Year 2020:
+| Region     | Gold Ore | Gold | Silver Ore | Silver | Platinum Ore | Platinum | Palladium Ore | Palladium | REO Ore | REO  | Yttrium Oxide | Scandium Oxide |
+|------------|----------|------|------------|--------|--------------|----------|---------------|-----------|---------|------|---------------|----------------|
+| USA        | 200      | 205  | 900        | 840    | 3.8          | 3.6      | 15.2          | 14        | 38,000  | 520  | 2,600         | 2.9            |
+| Russia     | 295      | 280  | 1,400      | 1,300  | 22           | 20       | 86            | 79        | 2,600   | 28   | 140           | 0.2            |
+| EU + UK    | 20       | 17   | 1,300      | 1,200  | 0.2          | 0.1      | 0.8           | 0.7       | 200     | 4    | 20            | 0.02           |
+| China      | 380      | 360  | 3,800      | 3,550  | 3.5          | 3.2      | 14            | 12.8      | 140,000 | 1720 | 8,600         | 9.6            |
+| India      | 12       | 10   | 250        | 230    | 0.3          | 0.3      | 1.2           | 1.1       | 4,000   | 52   | 260           | 0.3            |
+| Japan      | 6        | 5    | 250        | 230    | 0.03         | 0.02     | 0.12          | 0.11      | 100     | 1    | 5             | 0.01           |
+| Other      | 87       | 83   | 2,100      | 1,900  | 0.2          | 0.2      | 0.68          | 0.62      | 55,100  | 735  | 3,675         | 4.1            |
+| Total      | 1,000    | 960  | 10,000     | 9,250  | 30           | 27.4     | 118           | 108.3     | 240,000 | 3060 | 15,300        | 17.13          |
+
+Year 2030 (projected):
+| Region     | Gold Ore | Gold | Silver Ore | Silver | Platinum Ore | Platinum | Palladium Ore | Palladium | REO Ore | REO  | Yttrium Oxide | Scandium Oxide |
+|------------|----------|------|------------|--------|--------------|----------|---------------|-----------|---------|------|---------------|----------------|
+| USA        | 180      | 185  | 800        | 750    | 4.2          | 4.0      | 16.8          | 15.4      | 42,000  | 575  | 2,875         | 3.2            |
+| Russia     | 320      | 305  | 1,500      | 1,400  | 20           | 18       | 78            | 71.6      | 3,000   | 32   | 160           | 0.2            |
+| EU + UK    | 15       | 13   | 1,200      | 1,100  | 0.1          | 0.1      | 0.4           | 0.4       | 150     | 3    | 15            | 0.02           |
+| China      | 400      | 385  | 4,000      | 3,750  | 4.0          | 3.7      | 16            | 14.7      | 160,000 | 1960 | 9,800         | 11             |
+| India      | 10       | 8    | 300        | 280    | 0.4          | 0.4      | 1.6           | 1.5       | 5,000   | 65   | 325           | 0.4            |
+| Japan      | 5        | 4    | 200        | 180    | 0.02         | 0.01     | 0.08          | 0.07      | 80      | 1    | 5             | 0.01           |
+| Other      | 70       | 67   | 2,000      | 1,790  | 0.1          | 0.1      | 0.32          | 0.29      | 64,770  | 864  | 4,320         | 4.8            |
+| Total      | 1,000    | 967  | 10,000     | 9,250  | 28.8         | 26.3     | 113.2         | 104       | 275,000 | 3500 | 17,500        | 19.63          |
+
+These projections are based on current trends and estimates, but actual numbers may vary depending on various factors such as changes in demand, technological advancements, new discoveries, and geopolitical situations.
 
 
 
