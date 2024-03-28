@@ -485,7 +485,7 @@ Assume 90% used for power, so 5.20 kg yellowcake / 1000 GJ power.
 
 #### OIL_xxxx_DRILLING
 
-See [AI Chat](https://github.com/t2civ/astropolis_sdk/blob/master/public/data/tables/README_AI_CHATS.md#Oil-and-gas-extraction).
+See [AI Chat](https://github.com/t2civ/astropolis_sdk/blob/master/public/data/tables/README_AI_CHATS.md#Oil-and-Gas).
 
 We use "conventional oil" input energy (0.58 MWh/tonne) for the case of 80% deposits, near-surface & subsurface. "Unconventional oil" figures would be simulated by deposits on the order of 16% and 8%. (Note: use these deposits to tune Earth nation Compositions.) We use 2x, 4x and 8x input energy for deep, extreme deep and ultra deep.
 
@@ -495,7 +495,7 @@ Output is 100% Oil.
 
 #### GAS_xxxx_DRILLING
 
-See [AI Chat](https://github.com/t2civ/astropolis_sdk/blob/master/public/data/tables/README_AI_CHATS.md#Oil-and-gas-extraction).
+See [AI Chat](https://github.com/t2civ/astropolis_sdk/blob/master/public/data/tables/README_AI_CHATS.md#Oil-and-gas).
 
 We use the smaller "conventional gas" input energy (0.14 MWh/tonne) for the case of 80% deposits, near-surface & subsurface. "Unconventional gas" figures would be simulated by deposits on the order of 20% and 8%. (Note: use these deposits to tune Earth territorial Compositions.) We use 2x, 4x and 8x input energy for deep, extreme deep and ultra deep.
 
@@ -505,7 +505,7 @@ We simplify and output separated products from drilling: 90% Methane, 9.975% Eth
 
 #### COAL_xxxx_MINING
 
-See [AI Chat](https://github.com/t2civ/astropolis_sdk/blob/master/public/data/tables/README_AI_CHATS.md#Coal-mining).
+See [AI Chat](https://github.com/t2civ/astropolis_sdk/blob/master/public/data/tables/README_AI_CHATS.md#Coal).
 
 We use the smaller energy values from the 2020 China figures (1.40 MWh per tonne surface, 2.90 MWh per tonne subsurface) for the case where we have 80% deposits. Larger values cited in the 2010 USDE would be simulated by deposits on the order of 50%. (Note: use these deposits to tune Earth territorial Compositions.) Assume 82% recovery ratio.
 
@@ -524,7 +524,7 @@ Per t mined:
 
 #### URANIUM_xxxx_MINING
 
-See [AI Chat](https://github.com/t2civ/astropolis_sdk/blob/master/public/data/tables/README_AI_CHATS.md#Uranium-mining).
+See [AI Chat](https://github.com/t2civ/astropolis_sdk/blob/master/public/data/tables/README_AI_CHATS.md#Uranium).
 
 We make a huge simplification here by ignoring in-sutu leaching and assuming all mining is for uranium ore. This let's us skip yellowcake as an intermediate commodity. However, it makes the energy cost of extraction higher than reality.
 
@@ -536,7 +536,7 @@ Output is 0.82 t/h Uranium Ore and 0.18 t/h Gravel/Conglomerate.
 
 #### IRON_xxxx_MINING
 
-See [AI Chat](https://github.com/t2civ/astropolis_sdk/blob/master/public/data/tables/README_AI_CHATS.md#Industrial-metals).
+See [AI Chat](https://github.com/t2civ/astropolis_sdk/blob/master/public/data/tables/README_AI_CHATS.md#Industrial-Metals).
 
 Assuming 50% "deposits".
 
@@ -544,12 +544,12 @@ Assuming 50% "deposits".
 
 #### ALUMINIUM_xxxx_MINING
 
-See [AI Chat](https://github.com/t2civ/astropolis_sdk/blob/master/public/data/tables/README_AI_CHATS.md#Industrial-metals).
+See [AI Chat](https://github.com/t2civ/astropolis_sdk/blob/master/public/data/tables/README_AI_CHATS.md#Industrial-Metals).
 
 
 #### INDUST_METALS_xxxx_MINING
 
-See [AI Chat](https://github.com/t2civ/astropolis_sdk/blob/master/public/data/tables/README_AI_CHATS.md#Industrial-metals).
+See [AI Chat](https://github.com/t2civ/astropolis_sdk/blob/master/public/data/tables/README_AI_CHATS.md#Industrial-Metals).
 
 #### PRECIOUS_METALS_xxxx_MINING
 
@@ -669,7 +669,7 @@ Assume price is at 1atm. Then, $100/59g.
 
 #### IRON_ORES
 
-See [AI Chat](https://github.com/t2civ/astropolis_sdk/blob/master/public/data/tables/README_AI_CHATS.md#Industrial-metals).
+See [AI Chat](https://github.com/t2civ/astropolis_sdk/blob/master/public/data/tables/README_AI_CHATS.md#Industrial-Metals).
 
 Defined as 70% Fe by weight. This is a small bump from contemporary 62%.
 
@@ -677,7 +677,7 @@ Defined as 70% Fe by weight. This is a small bump from contemporary 62%.
 
 #### ALUMINIUM_ORES
 
-See [AI Chat](https://github.com/t2civ/astropolis_sdk/blob/master/public/data/tables/README_AI_CHATS.md#Industrial-metals).
+See [AI Chat](https://github.com/t2civ/astropolis_sdk/blob/master/public/data/tables/README_AI_CHATS.md#Industrial-Metals).
 
 Defined as 20% aluminium (primary). This is less than half the bauxite value (the main ore commodity on Earth) but is at the high end of concentrations in non-sedementary ores, so perhaps a better expectation for a future space economy.
 
@@ -685,7 +685,7 @@ Defined as 20% aluminium (primary). This is less than half the bauxite value (th
 
 #### INDUSTRIAL_METAL_ORES
 
-See [AI Chat](https://github.com/t2civ/astropolis_sdk/blob/master/public/data/tables/README_AI_CHATS.md#Industrial-metals).
+See [AI Chat](https://github.com/t2civ/astropolis_sdk/blob/master/public/data/tables/README_AI_CHATS.md#Industrial-Metals).
 
 Catch-all for dozens of others besides iron & aluminium. We're using copper, nickle, zinc & lead for inspiration, although I'd guess that others are mostly lower concentrations and higher prices. These four range from 1-15% metal by content, w/ 2010 prices $800-2000/t.
 
