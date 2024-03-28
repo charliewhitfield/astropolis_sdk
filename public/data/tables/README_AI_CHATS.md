@@ -292,6 +292,28 @@ It's worth noting that the power generation of the Tiangong Space Station is sig
 
 As the construction of the Tiangong Space Station progresses and more modules are added, we can expect to have more accurate data on its actual power generation capabilities.
 
+****
+
+The International Space Station (ISS) is constructed using various materials, each serving specific purposes based on their properties. Here's a breakdown of the main bulk constituents of the ISS by weight percentage:
+
+1. Aluminum: Approximately 20% of the ISS by weight is made up of aluminum. Aluminum is used extensively in the ISS due to its lightweight nature, strength, and resistance to corrosion.
+
+2. Steel: Steel makes up around 10% of the ISS by weight. It is used in areas that require high strength and durability, such as trusses, modules, and pressure vessels.
+
+3. Multi-Layer Insulation (MLI): MLI accounts for about 10% of the ISS weight. It is used to insulate the station from extreme temperature fluctuations and to protect against micrometeoroids and orbital debris.
+
+4. Internal Equipment and Payloads: A significant portion of the ISS weight, approximately 30%, comes from the various internal equipment, experiments, and payloads housed within the station.
+
+5. Solar Arrays and Batteries: The solar arrays and batteries, which provide power to the ISS, make up around 5% of the total weight.
+
+6. Other Materials: The remaining 25% of the ISS weight is made up of various other materials, including:
+   - Titanium: Used in high-temperature areas and for structural reinforcement.
+   - Kevlar: Used in shielding and protection against micrometeoroids and orbital debris.
+   - Teflon: Used for insulation and as a lubricant in moving parts.
+   - Glass: Used in windows and other transparent components.
+   - Plastic: Used in a variety of applications, such as insulation and packaging.
+
+It's important to note that these percentages are approximate and may vary depending on the specific modules and components being considered. Additionally, as the ISS continues to evolve and new modules and equipment are added, the overall composition percentages may change over time.
 
 ## Oil and gas extraction
 
